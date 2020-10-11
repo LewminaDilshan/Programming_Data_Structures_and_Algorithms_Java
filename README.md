@@ -1,3 +1,3 @@
 # PDSA_CW_Project
 
-Please create new branches using your name by downmerging origin branch.
+Please create new branches using your name by downmerging main branch.
