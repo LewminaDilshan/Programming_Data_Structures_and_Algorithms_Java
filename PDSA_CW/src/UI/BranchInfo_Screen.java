@@ -47,6 +47,8 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cmb_action = new javax.swing.JComboBox<>();
+        lbl_nanoScnds = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -130,6 +132,12 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             }
         });
 
+        lbl_nanoScnds.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        lbl_nanoScnds.setForeground(new java.awt.Color(255, 0, 0));
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
+        jLabel7.setText("Execution time in nano seconds :");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -167,8 +175,13 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cmb_Program, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
                         .addGap(55, 55, 55))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -176,11 +189,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(105, 105, 105)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -196,11 +205,19 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txt_location, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(116, 116, 116)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                        .addGap(116, 116, 116)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(105, 105, 105)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)))
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(439, Short.MAX_VALUE))
         );
@@ -222,25 +239,33 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
+        long startTime = 00;
+        long endTime = 00;
         if(cmb_action.getSelectedIndex() == 1)
         {
             if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
+                startTime = System.nanoTime();
                 bds2.Load(tbl_branchInfo);
+                endTime = System.nanoTime();
             }
         }
         else if(cmb_action.getSelectedIndex() == 2)
         {
             if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
+                startTime = System.nanoTime();
                 bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                endTime = System.nanoTime();
             }
         }
         else if(cmb_action.getSelectedIndex() == 3)
         {
             if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
+                startTime = System.nanoTime();
                 bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                endTime = System.nanoTime();
             }
         }
         else if(cmb_action.getSelectedIndex() == 4)
@@ -248,9 +273,14 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 if(tbl_branchInfo.getRowCount() > 0)
+                {
+                    startTime = System.nanoTime();
                     bds2.Remove((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
+                    endTime = System.nanoTime();
+                }
             }
         }
+        getExecTime(startTime,endTime);
         ClearFields();
     }//GEN-LAST:event_btn_submitActionPerformed
 
@@ -274,12 +304,18 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     private void cmb_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_actionActionPerformed
         // TODO add your handling code here:
         ClearFields();
+        lbl_nanoScnds.setText("");
     }//GEN-LAST:event_cmb_actionActionPerformed
 
     public void ClearFields()
     {
         txt_branchName.setText("");
         txt_location.setText("");
+    }
+    
+    public void getExecTime(long startTime, long endTime)
+    {
+        lbl_nanoScnds.setText(String.valueOf(endTime - startTime));
     }
     /**
      * @param args the command line arguments
@@ -326,9 +362,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lbl_nanoScnds;
     private javax.swing.JTable tbl_branchInfo;
     private javax.swing.JTextField txt_branchName;
     private javax.swing.JTextField txt_location;
