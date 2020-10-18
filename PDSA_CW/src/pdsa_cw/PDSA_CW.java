@@ -5,6 +5,8 @@
  */
 package pdsa_cw;
 
+import UI.BranchInfo_Screen;
+
 /**
  *
  * @author lewmi
@@ -16,6 +18,8 @@ public class PDSA_CW {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        BranchInfo_Screen branchInfo = new BranchInfo_Screen();
+        branchInfo.setVisible(true);
     }
     
 }
