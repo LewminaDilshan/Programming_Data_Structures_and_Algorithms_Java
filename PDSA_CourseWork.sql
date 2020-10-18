@@ -11,12 +11,12 @@ CREATE TABLE Branches (
 
 CREATE TABLE Distances (
 	DistanceId int IDENTITY(1,1) NOT NULL,
-	StartBranchId int  NOT NULL,
-	EndBranchId int  NOT NULL,
+	FromBranchId int  NOT NULL,
+	ToBranchId int  NOT NULL,
 	Distance numeric(18,2) NOT NULL,
 	PRIMARY KEY (DistanceId),
-	CONSTRAINT FK_BranchesDistances_StartBranch FOREIGN KEY (StartBranchId)
+	CONSTRAINT FK_BranchesDistances_FromBranch FOREIGN KEY (FromBranchId)
     REFERENCES Branches(BranchId),
-	CONSTRAINT FK_BranchesDistances_EndBranch FOREIGN KEY (EndBranchId)
+	CONSTRAINT FK_BranchesDistances_ToBranch FOREIGN KEY (ToBranchId)
     REFERENCES Branches(BranchId)
 );
