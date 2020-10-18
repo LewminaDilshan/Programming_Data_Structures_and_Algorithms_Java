@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pdsa_cw;
+package UI;
+
+import Data_Structures.BranchInfo_DS2;
 
 /**
  *
@@ -122,6 +124,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
         cmb_action.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         cmb_action.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Select---", "Load", "Insert", "Update", "Delete" }));
+        cmb_action.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmb_actionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -263,6 +270,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tbl_branchInfoMouseClicked
+
+    private void cmb_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_actionActionPerformed
+        // TODO add your handling code here:
+        ClearFields();
+    }//GEN-LAST:event_cmb_actionActionPerformed
 
     public void ClearFields()
     {
