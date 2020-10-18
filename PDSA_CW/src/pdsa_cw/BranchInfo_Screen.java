@@ -14,8 +14,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     /**
      * Creates new form BranchInfo_Screen
      */
+    BranchInfo_DS2 bds2;
+    
     public BranchInfo_Screen() {
         initComponents();
+        bds2 = new BranchInfo_DS2();
     }
 
     /**
@@ -60,15 +63,27 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         tbl_branchInfo.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         tbl_branchInfo.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Branch ID", "Branch Name", "Location"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tbl_branchInfo);
 
         btn_submit.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -100,6 +115,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
         btn_add.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_add.setText("Add");
+        btn_add.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_addActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -195,6 +215,14 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_submitActionPerformed
+
+    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+        // TODO add your handling code here:
+        if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+        {
+            bds2.Insert(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+        }
+    }//GEN-LAST:event_btn_addActionPerformed
 
     /**
      * @param args the command line arguments
