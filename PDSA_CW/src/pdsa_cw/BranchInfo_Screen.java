@@ -45,7 +45,6 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         cmb_action = new javax.swing.JComboBox<>();
-        btn_add = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -84,6 +83,12 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tbl_branchInfo.getTableHeader().setReorderingAllowed(false);
+        tbl_branchInfo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_branchInfoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbl_branchInfo);
 
         btn_submit.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -96,6 +101,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
         btn_clear.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btn_clear.setText("Clear");
+        btn_clear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_clearActionPerformed(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         jLabel1.setText("Branch Information");
@@ -113,14 +123,6 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         cmb_action.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         cmb_action.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---Select---", "Load", "Insert", "Update", "Delete" }));
 
-        btn_add.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_add.setText("Add");
-        btn_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_addActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,12 +134,8 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                         .addGap(23, 23, 23)
                         .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(218, 218, 218)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(59, 59, 59)
-                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(37, 37, 37)
@@ -145,21 +143,26 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel6))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel3))
-                                .addGap(109, 109, 109)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(txt_location)
-                                    .addComponent(txt_branchName, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(35, 35, 35)
-                        .addComponent(cmb_Program, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(650, 650, 650)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
-                .addGap(55, 55, 55))
+                                .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(71, 71, 71)
+                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3))
+                        .addGap(71, 71, 71)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txt_location, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txt_branchName, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cmb_Program, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+                        .addGap(55, 55, 55))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,9 +189,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
                             .addComponent(txt_location, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_add, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(78, 78, 78)))
+                        .addGap(116, 116, 116)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -214,16 +215,60 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
+        if(cmb_action.getSelectedIndex() == 1)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                bds2.Load(tbl_branchInfo);
+            }
+        }
+        else if(cmb_action.getSelectedIndex() == 2)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+            }
+        }
+        else if(cmb_action.getSelectedIndex() == 3)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+            }
+        }
+        else if(cmb_action.getSelectedIndex() == 4)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                if(tbl_branchInfo.getRowCount() > 0)
+                    bds2.Remove((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
+            }
+        }
+        ClearFields();
     }//GEN-LAST:event_btn_submitActionPerformed
 
-    private void btn_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_addActionPerformed
+    private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
-        if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
-        {
-            bds2.Insert(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-        }
-    }//GEN-LAST:event_btn_addActionPerformed
+        ClearFields();
+    }//GEN-LAST:event_btn_clearActionPerformed
 
+    private void tbl_branchInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_branchInfoMouseClicked
+        // TODO add your handling code here:
+        if(tbl_branchInfo.getSelectedRowCount() != 0)
+        {
+            if(cmb_action.getSelectedIndex() == 3 || cmb_action.getSelectedIndex() == 4)
+            {
+                txt_branchName.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 1).toString());
+                txt_location.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 2).toString());
+            }
+        }
+    }//GEN-LAST:event_tbl_branchInfoMouseClicked
+
+    public void ClearFields()
+    {
+        txt_branchName.setText("");
+        txt_location.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -260,7 +305,6 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_add;
     private javax.swing.JButton btn_clear;
     private javax.swing.JButton btn_submit;
     private javax.swing.JComboBox<String> cmb_Program;
