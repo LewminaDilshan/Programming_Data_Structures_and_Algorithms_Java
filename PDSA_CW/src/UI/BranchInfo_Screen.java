@@ -327,6 +327,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
         ClearFields();
+        lbl_nanoScnds.setText("");
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void tbl_branchInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_branchInfoMouseClicked

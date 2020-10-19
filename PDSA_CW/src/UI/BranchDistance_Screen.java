@@ -5,6 +5,10 @@
  */
 package UI;
 
+import Data_Structures.BranchDistance_DS2;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+
 /**
  *
  * @author lewmi
@@ -14,8 +18,15 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
     /**
      * Creates new form BranchDistance_Screen
      */
+    BranchDistance_DS2 bdds2;
+    
     public BranchDistance_Screen() {
         initComponents();
+        bdds2 = new BranchDistance_DS2();
+        bdds2.LoadBranchInfo(tbl_branchInfo);
+        rbnGroup_fromTo.add(rbn_fromBranch);
+        rbnGroup_fromTo.add(rbn_ToBranch);
+        rbn_fromBranch.setSelected(true);
     }
 
     /**
@@ -27,6 +38,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        rbnGroup_fromTo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -160,33 +172,48 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         jLabel10.setText("Branch ID");
 
         jLabel11.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel11.setText("From Branch Informations");
+        jLabel11.setText("From Branch Information");
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel12.setText("To Branch Informations");
+        jLabel12.setText("To Branch Information");
 
+        tbl_branchDistance.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         tbl_branchDistance.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Distance ID", "From Branch ID", "From Branch Name", "From Location", "To Branch ID", "To Branch Name", "To Location", "Distance (KM)"
             }
         ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, true, true
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tbl_branchDistance.getTableHeader().setReorderingAllowed(false);
+        tbl_branchDistance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbl_branchDistanceMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(tbl_branchDistance);
         if (tbl_branchDistance.getColumnModel().getColumnCount() > 0) {
             tbl_branchDistance.getColumnModel().getColumn(0).setResizable(false);
             tbl_branchDistance.getColumnModel().getColumn(1).setResizable(false);
-            tbl_branchDistance.getColumnModel().getColumn(2).setResizable(false);
             tbl_branchDistance.getColumnModel().getColumn(3).setResizable(false);
+            tbl_branchDistance.getColumnModel().getColumn(4).setResizable(false);
+            tbl_branchDistance.getColumnModel().getColumn(7).setResizable(false);
         }
 
         rbn_fromBranch.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
@@ -198,7 +225,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         txt_distance.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
-        jLabel13.setText("Distance");
+        jLabel13.setText("Distance (KM)");
 
         btn_submit.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         btn_submit.setText("Submit");
@@ -259,7 +286,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
                                                         .addGap(18, 18, 18)
                                                         .addComponent(txt_fromBranchName, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                             .addComponent(jLabel11))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(jLabel12)
@@ -276,9 +303,9 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
                                                 .addComponent(jLabel7)
                                                 .addGap(54, 54, 54)
                                                 .addComponent(txt_toLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGap(41, 41, 41))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(295, 295, 295)
+                                        .addGap(33, 33, 33))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(jPanel1Layout.createSequentialGroup()
                                                 .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,13 +315,13 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
                                                 .addComponent(jLabel13)
                                                 .addGap(18, 18, 18)
                                                 .addComponent(txt_distance, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .addGap(227, 227, 227)))
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 699, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(jLabel14)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 939, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(50, 50, 50))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,7 +371,10 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(54, 54, 54))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel11)
@@ -371,15 +401,14 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel3)
                                         .addComponent(txt_fromLocation, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(53, 53, 53)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel13)
-                                    .addComponent(txt_distance, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(txt_distance, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(51, 51, 51)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btn_submit, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(61, Short.MAX_VALUE))
         );
 
@@ -400,20 +429,128 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
 
     private void cmb_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_actionActionPerformed
         // TODO add your handling code here:
+        ClearFields();
+        lbl_nanoScnds.setText("");
     }//GEN-LAST:event_cmb_actionActionPerformed
 
     private void tbl_branchInfoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_branchInfoMouseClicked
         // TODO add your handling code here:
+        if(tbl_branchInfo.getSelectedRowCount() != 0)
+        {
+            if(cmb_action.getSelectedIndex() == 2 || cmb_action.getSelectedIndex() == 3)
+            {
+                if(rbn_fromBranch.isSelected() == true)
+                {
+                    txt_fromBranchId.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0).toString());
+                    txt_fromBranchName.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 1).toString());
+                    txt_fromLocation.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 2).toString());
+                }
+                else
+                {
+                    txt_toBranchId.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0).toString());
+                    txt_toBranchName.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 1).toString());
+                    txt_toLocation.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 2).toString());
+                }
+            }
+        }
     }//GEN-LAST:event_tbl_branchInfoMouseClicked
-
-    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
+        ClearFields();
+        lbl_nanoScnds.setText("");
     }//GEN-LAST:event_btn_clearActionPerformed
 
+    private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
+        // TODO add your handling code here:
+        long startTime = 00;
+        long endTime = 00;
+        
+        if(cmb_action.getSelectedIndex() == 1)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                startTime = System.nanoTime();
+                bdds2.Load(tbl_branchDistance);
+                endTime = System.nanoTime();
+                ClearFields();
+            }
+        }
+        else if(cmb_action.getSelectedIndex() == 2)
+        {
+            if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
+            {
+                startTime = System.nanoTime();
+                bdds2.Add(txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
+                endTime = System.nanoTime();
+                ClearFields();
+            }
+        }
+        else if(cmb_action.getSelectedIndex() == 3)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty())
+                {
+                    startTime = System.nanoTime();
+                    bdds2.Update((String)tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0), txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
+            }
+        }
+        else if(cmb_action.getSelectedIndex() == 4)
+        {
+            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            {
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0)
+                {
+                    startTime = System.nanoTime();
+                    bdds2.Remove((String)tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0), tbl_branchDistance);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
+            }
+        }
+        getExecTime(startTime,endTime);
+    }//GEN-LAST:event_btn_submitActionPerformed
+
+    private void tbl_branchDistanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_branchDistanceMouseClicked
+        // TODO add your handling code here:
+        if(tbl_branchDistance.getSelectedRowCount() != 0)
+        {
+            if(cmb_action.getSelectedIndex() == 3 || cmb_action.getSelectedIndex() == 4)
+            {
+                txt_fromBranchId.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 1).toString());
+                txt_fromBranchName.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 2).toString());
+                txt_fromLocation.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 3).toString());
+                txt_toBranchId.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 4).toString());
+                txt_toBranchName.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 5).toString());
+                txt_toLocation.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 6).toString());
+                txt_distance.setText(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 7).toString());
+            }
+        }
+    }//GEN-LAST:event_tbl_branchDistanceMouseClicked
+
+    public void getExecTime(long startTime, long endTime)
+    {
+        DecimalFormat df = new DecimalFormat("#.#####");
+        df.setRoundingMode(RoundingMode.CEILING);
+        long elapsedTime = endTime - startTime;
+        Double inMiliSeconds = (double)elapsedTime/1000000000;
+        lbl_nanoScnds.setText(String.valueOf(elapsedTime) + " ( " + df.format(inMiliSeconds) + "s ) ");
+    }
+    
+    public void ClearFields()
+    {
+        txt_fromBranchId.setText("");
+        txt_fromBranchName.setText("");
+        txt_fromLocation.setText("");
+        txt_toBranchId.setText("");
+        txt_toBranchName.setText("");
+        txt_toLocation.setText("");
+        txt_distance.setText("");
+    }
     /**
      * @param args the command line arguments
      */
@@ -472,6 +609,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lbl_nanoScnds;
+    private javax.swing.ButtonGroup rbnGroup_fromTo;
     private javax.swing.JRadioButton rbn_ToBranch;
     private javax.swing.JRadioButton rbn_fromBranch;
     private javax.swing.JTable tbl_branchDistance;
