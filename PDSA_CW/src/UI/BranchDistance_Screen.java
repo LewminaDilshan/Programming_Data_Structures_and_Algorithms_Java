@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Data_Structures.BranchDistance_DS2;
+import Data_Structures.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
@@ -18,10 +18,13 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
     /**
      * Creates new form BranchDistance_Screen
      */
+    BranchDistance_DS1 branchDistanceOne;
     BranchDistance_DS2 bdds2;
     
     public BranchDistance_Screen() {
         initComponents();
+        branchDistanceOne = new BranchDistance_DS1();
+        branchDistanceOne.LoadBranchInfomation(tbl_branchInfo);
         bdds2 = new BranchDistance_DS2();
         bdds2.LoadBranchInfo(tbl_branchInfo);
         rbnGroup_fromTo.add(rbn_fromBranch);
@@ -468,7 +471,14 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         
         if(cmb_action.getSelectedIndex() == 1)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            {
+                startTime = System.nanoTime();
+                branchDistanceOne.LoadDistanceInformation(tbl_branchDistance);
+                endTime = System.nanoTime();
+                ClearFields();
+            }
+            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 startTime = System.nanoTime();
                 bdds2.Load(tbl_branchDistance);
@@ -478,7 +488,14 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 2)
         {
-            if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
+            if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2))
+            {
+                startTime = System.nanoTime();
+                branchDistanceOne.InsertDistanceInformation(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
+                endTime = System.nanoTime();
+                ClearFields();
+            }
+            else if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
             {
                 startTime = System.nanoTime();
                 bdds2.Add(txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
@@ -488,7 +505,17 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 3)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            {
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty())
+                {
+                    startTime = System.nanoTime();
+                    branchDistanceOne.UpdateDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
+            }
+            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty())
                 {
@@ -501,7 +528,17 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 4)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            {
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0)
+                {
+                    startTime = System.nanoTime();
+                    branchDistanceOne.DeleteDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), tbl_branchDistance);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
+            }
+            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0)
                 {
