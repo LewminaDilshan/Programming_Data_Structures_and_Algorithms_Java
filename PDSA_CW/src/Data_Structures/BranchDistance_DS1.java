@@ -29,6 +29,7 @@ public class BranchDistance_DS1 {
     {
         linkedListDistances = new LinkedList<>();
         linkedListBranches = new LinkedList<>();
+        db = new DB_Access();
     }
     
     public void LoadBranchInfomation(JTable branchInfo)
