@@ -194,7 +194,7 @@
                               <Component id="rbn_fromBranch" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="rbn_ToBranch" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
+                          <EmptySpace pref="33" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="txt_search" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>

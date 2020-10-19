@@ -98,7 +98,7 @@ public class BranchDistance_DS1 {
                         row[2] = b.getBranchName();
                         row[3] = b.getLocation();
                     }
-                    else if(b.getBranchId()== d.getFromBranchId())
+                    else if(b.getBranchId()== d.getToBranchId())
                     {
                         row[4] = b.getBranchId();
                         row[5] = b.getBranchName();
@@ -143,7 +143,7 @@ public class BranchDistance_DS1 {
             DefaultTableModel model = (DefaultTableModel) distanceInfo.getModel();
             model.setRowCount(0);
             Object[] row = new Object[8];
-            for (Distances d : linkedListDistances)
+             for (Distances d : linkedListDistances)
             {
                 row[0] = d.getDistanceId();
                 linkedListBranches.forEach((b) -> {
@@ -153,7 +153,7 @@ public class BranchDistance_DS1 {
                         row[2] = b.getBranchName();
                         row[3] = b.getLocation();
                     }
-                    else if(b.getBranchId()== d.getFromBranchId())
+                    else if(b.getBranchId()== d.getToBranchId())
                     {
                         row[4] = b.getBranchId();
                         row[5] = b.getBranchName();
@@ -209,7 +209,7 @@ public class BranchDistance_DS1 {
             DefaultTableModel model = (DefaultTableModel) distanceInfo.getModel();
             model.setRowCount(0);
             Object[] row = new Object[8];
-            for (Distances d : linkedListDistances)
+             for (Distances d : linkedListDistances)
             {
                 row[0] = d.getDistanceId();
                 linkedListBranches.forEach((b) -> {
@@ -219,7 +219,7 @@ public class BranchDistance_DS1 {
                         row[2] = b.getBranchName();
                         row[3] = b.getLocation();
                     }
-                    else if(b.getBranchId()== d.getFromBranchId())
+                    else if(b.getBranchId()== d.getToBranchId())
                     {
                         row[4] = b.getBranchId();
                         row[5] = b.getBranchName();
@@ -255,7 +255,7 @@ public class BranchDistance_DS1 {
             DefaultTableModel model = (DefaultTableModel) distanceInfo.getModel();
             model.setRowCount(0);
             Object[] row = new Object[8];
-            for (Distances d : linkedListDistances)
+           for (Distances d : linkedListDistances)
             {
                 row[0] = d.getDistanceId();
                 linkedListBranches.forEach((b) -> {
@@ -265,7 +265,7 @@ public class BranchDistance_DS1 {
                         row[2] = b.getBranchName();
                         row[3] = b.getLocation();
                     }
-                    else if(b.getBranchId()== d.getFromBranchId())
+                    else if(b.getBranchId()== d.getToBranchId())
                     {
                         row[4] = b.getBranchId();
                         row[5] = b.getBranchName();
