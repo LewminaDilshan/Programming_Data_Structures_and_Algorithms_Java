@@ -199,6 +199,23 @@ public class DB_Access {
         return count;
     }
     
+    public int BranchDistanceInsert(int distanceId, int fromBranchId, int toBranchId, String distance)
+    {
+        String insertSql = "INSERT INTO Distances VALUES ('"+distanceId+"', '"+fromBranchId+"', '"+toBranchId+"', '"+distance+"');";
+
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
     public int BranchDistanceUpdate(String[] arry)
     {
         String deleteSql = "Update Distances set FromBranchId = '"+arry[1]+"', ToBranchId = '"+arry[4]+"', Distance = '"+arry[7]+"' where DistanceId = '"+arry[0]+"';";
@@ -216,9 +233,43 @@ public class DB_Access {
         return count;
     }
     
+     public int BranchDistanceUpdate(int distanceId, int fromBranchId, int toBranchId, String distance)
+    {
+        String deleteSql = "Update Distances set FromBranchId = '"+fromBranchId+"', ToBranchId = '"+toBranchId+"', Distance = '"+distance+"' where DistanceId = '"+distanceId+"';";
+        
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
     public int BranchDistanceDelete(String id)
     {
         String deleteSql = "Delete from Distances where DistanceId = '"+id+"';";
+      
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
+    public int BranchDistanceDelete(int distanceId)
+    {
+        String deleteSql = "Delete from Distances where DistanceId = '"+distanceId+"';";
       
         int count = 0;
         try 

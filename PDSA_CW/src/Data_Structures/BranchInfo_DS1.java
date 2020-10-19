@@ -21,6 +21,7 @@ public class BranchInfo_DS1 {
     Branches branch;
     LinkedList<Branches> linkedList;
     DB_Access db;
+    
     public BranchInfo_DS1()
     {
         linkedList = new LinkedList<>();
@@ -70,7 +71,11 @@ public class BranchInfo_DS1 {
             branch = new Branches();
             if(branchInfo.getRowCount() > 0)
             {
-                branch.setBranchId(Integer.parseInt((String) branchInfo.getValueAt(branchInfo.getModel().getRowCount()-1, 0))+1);
+                branch.setBranchId(Integer.parseInt(String.valueOf(branchInfo.getValueAt(branchInfo.getModel().getRowCount()-1, 0)))+1);
+            }
+            else if(branchInfo.getRowCount() == 0)
+            {
+                branch.setBranchId(0);
             }
             branch.setBranchName(branchName);
             branch.setLocation(branchLocation); 
@@ -102,14 +107,8 @@ public class BranchInfo_DS1 {
         
     public void UpdateBranchInformation(int branchId, String branchName, String branchLocation, JTable branchInfo)
     {
-//        branch = new Branches();
-//        branch.setBranchId(branchInfo);
-//        branch.setBranchName(branchName);
-//        branch.setLocation(branchLocation);
-//        linkedList.set(2,branch);
-//        System.out.println("Size 1  "+linkedList.size());
-//        System.out.println(linkedList.peek().getBranchId());
-      try
+
+        try
         {
             for (int i = 0; i < linkedList.size(); i++) 
             {
