@@ -9,6 +9,7 @@ import DataBase_Access.DB_Access;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -37,9 +38,10 @@ public class BranchInfo_DS2 {
         aryRecd[1] = bName;
         aryRecd[2] = bLocation;
         
-        db.BranchInfoInsert(aryRecd);
-
-        Queue.add(aryRecd);
+        int count = db.BranchInfoInsert(aryRecd);
+        if(count > 0)
+            Queue.add(aryRecd);
+        
         DefaultTableModel model = (DefaultTableModel) jt.getModel();
         model.setRowCount(0);
         for(String[] s : Queue) { 
@@ -54,8 +56,11 @@ public class BranchInfo_DS2 {
             String[] selAry = Queue.peek();
             if(selAry[0].equals(id))
             {
-                Queue.remove();
-                db.BranchInfoDelete(id);
+                int count = db.BranchInfoDelete(id);
+                if(count > 0)
+                    Queue.remove(); 
+                else
+                    Queue.add(Queue.remove());
             }
             else
             {
@@ -87,7 +92,7 @@ public class BranchInfo_DS2 {
         }
         catch(SQLException e)
         {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
 
         DefaultTableModel model = (DefaultTableModel) jt.getModel();
@@ -104,13 +109,18 @@ public class BranchInfo_DS2 {
             String[] selAry = Queue.peek();
             if(selAry[0].equals(id))
             {
-                Queue.remove();
                 String[] aryRecd = new String[3];
                 aryRecd[0] = id;
                 aryRecd[1] = bName;
                 aryRecd[2] = bLocation;
-                Queue.add(aryRecd);
-                db.BranchInfoUpdate(aryRecd);
+                int count = db.BranchInfoUpdate(aryRecd);
+                if(count > 0)
+                {
+                    Queue.remove();
+                    Queue.add(aryRecd);
+                }
+                else
+                    Queue.add(Queue.remove());    
             }
             else
             {

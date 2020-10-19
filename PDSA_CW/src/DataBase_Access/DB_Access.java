@@ -15,6 +15,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class DB_Access {
     // Connect to your database.
@@ -33,56 +34,42 @@ public class DB_Access {
         }
         // Handle any errors that may have occurred.
         catch (SQLException e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
     
-    public void BranchInfoInsert(String[] arry)
+    public int BranchInfoInsert(String[] arry)
     {
         String insertSql = "INSERT INTO Branches VALUES ('"+arry[0]+"', '"+arry[1]+"', '"+arry[2]+"');";
-        
-        ResultSet resultSet = null;
 
+        int count = 0;
         try 
         {
             PreparedStatement prepsInsertProduct = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
-            prepsInsertProduct.execute();
-            // Retrieve the generated key from the insert.
-            resultSet = prepsInsertProduct.getGeneratedKeys();
-
-            // Print the ID of the inserted row.
-            while (resultSet.next()) {
-                System.out.println("Generated: " + resultSet.getString(1));
-            }
+            count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
         catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return count;
     }
     
-    public void BranchInfoDelete(String id)
+    public int BranchInfoDelete(String id)
     {
         String deleteSql = "Delete from Branches where BranchId = '"+id+"';";
-        
-        ResultSet resultSet = null;
 
+        int count = 0;
         try 
         {
             PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
-            prepsInsertProduct.execute();
-            // Retrieve the generated key from the insert.
-            resultSet = prepsInsertProduct.getGeneratedKeys();
-
-            // Print the ID of the inserted row.
-            while (resultSet.next()) {
-                System.out.println("Generated: " + resultSet.getString(1));
-            }
+            count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
         catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return count;
     }
     
     public ResultSet BranchInfoLoad()
@@ -98,33 +85,26 @@ public class DB_Access {
         }
         // Handle any errors that may have occurred.
         catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         
         return resultSet;
     }
     
-    public void BranchInfoUpdate(String[] arry)
+    public int BranchInfoUpdate(String[] arry)
     {
         String deleteSql = "Update Branches set BranchName = '"+arry[1]+"', Location = '"+arry[2]+"' where BranchId = '"+arry[0]+"';";
         
-        ResultSet resultSet = null;
-
+        int count = 0;
         try 
         {
             PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
-            prepsInsertProduct.execute();
-            // Retrieve the generated key from the insert.
-            resultSet = prepsInsertProduct.getGeneratedKeys();
-
-            // Print the ID of the inserted row.
-            while (resultSet.next()) {
-                System.out.println("Generated: " + resultSet.getString(1));
-            }
+            count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
         catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        return count;
     }
 }
