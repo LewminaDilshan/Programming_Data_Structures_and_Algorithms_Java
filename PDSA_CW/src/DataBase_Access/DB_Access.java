@@ -26,7 +26,7 @@ public class DB_Access {
     {       
         String url = "jdbc:sqlserver://MSI\\SQLFULL:1433;databaseName=PDSACourseWork;";
         String user = "sa";
-        String pass = "12345";
+        String pass = "020396";
 
         try  {
             connection = DriverManager.getConnection(url,user, pass);
@@ -55,9 +55,47 @@ public class DB_Access {
         return count;
     }
     
+    
+    public int BranchInfoInsert(int branchId, String branchName, String branchLocation)
+    {
+        String insertSql = "INSERT INTO Branches VALUES ('"+branchId+"', '"+branchName+"', '"+branchLocation+"');";
+
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
     public int BranchInfoDelete(String id)
     {
         String deleteSql = "Delete from Branches where BranchId = '"+id+"';";
+
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
+    public int BranchInfoDelete(int branchId)
+    {
+        String deleteSql = "Delete from Branches where BranchId = '"+branchId+"';";
 
         int count = 0;
         try 
@@ -94,6 +132,23 @@ public class DB_Access {
     public int BranchInfoUpdate(String[] arry)
     {
         String deleteSql = "Update Branches set BranchName = '"+arry[1]+"', Location = '"+arry[2]+"' where BranchId = '"+arry[0]+"';";
+        
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
+    public int BranchInfoUpdate(int branchId, String branchName, String branchLocation)
+    {
+        String deleteSql = "Update Branches set BranchName = '"+branchName+"', Location = '"+branchLocation+"' where BranchId = '"+branchId+"';";
         
         int count = 0;
         try 

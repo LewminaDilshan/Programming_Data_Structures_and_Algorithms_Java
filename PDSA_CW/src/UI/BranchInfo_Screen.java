@@ -5,7 +5,7 @@
  */
 package UI;
 
-import Data_Structures.BranchInfo_DS2;
+import Data_Structures.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
@@ -18,10 +18,13 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     /**
      * Creates new form BranchInfo_Screen
      */
-    BranchInfo_DS2 bds2;
     
+    BranchInfo_DS1 dataStructureOne;
+    BranchInfo_DS2 bds2;
+
     public BranchInfo_Screen() {
         initComponents();
+        dataStructureOne = new BranchInfo_DS1();
         bds2 = new BranchInfo_DS2();
     }
 
@@ -240,7 +243,14 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         long endTime = 00;
         if(cmb_action.getSelectedIndex() == 1)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            {
+                startTime = System.nanoTime();
+                dataStructureOne.LoadBranchInformation(tbl_branchInfo);
+                endTime = System.nanoTime();
+                ClearFields();
+            }
+            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 startTime = System.nanoTime();
                 bds2.Load(tbl_branchInfo);
@@ -250,7 +260,14 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 2)
         {
-            if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
+            if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2))
+            {
+                startTime = System.nanoTime();
+                dataStructureOne.InsertBranchInformation(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                endTime = System.nanoTime();
+                ClearFields();
+            }
+            else if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
             {
                 startTime = System.nanoTime();
                 bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
@@ -260,7 +277,17 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 3)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            {
+                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                {
+                    startTime = System.nanoTime();
+                    dataStructureOne.UpdateBranchInformation((Integer)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
+            }
+            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
                 {
@@ -273,7 +300,17 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 4)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            {
+                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
+                {
+                    startTime = System.nanoTime();
+                    dataStructureOne.DeleteBranchInformation((Integer)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
+            }
+            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
                 if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
                 {
