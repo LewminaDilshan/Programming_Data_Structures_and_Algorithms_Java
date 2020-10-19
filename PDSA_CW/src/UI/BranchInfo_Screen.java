@@ -6,6 +6,8 @@
 package UI;
 
 import Data_Structures.BranchInfo_DS2;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -178,9 +180,10 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE))
                         .addGap(55, 55, 55))))
         );
@@ -248,40 +251,46 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                 startTime = System.nanoTime();
                 bds2.Load(tbl_branchInfo);
                 endTime = System.nanoTime();
+                ClearFields();
             }
         }
         else if(cmb_action.getSelectedIndex() == 2)
         {
-            if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
             {
                 startTime = System.nanoTime();
                 bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
                 endTime = System.nanoTime();
+                ClearFields();
             }
         }
         else if(cmb_action.getSelectedIndex() == 3)
         {
             if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
-                startTime = System.nanoTime();
-                bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                endTime = System.nanoTime();
+                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                {
+                    startTime = System.nanoTime();
+                    bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                    endTime = System.nanoTime();
+                    ClearFields();
+                }
             }
         }
         else if(cmb_action.getSelectedIndex() == 4)
         {
             if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
-                if(tbl_branchInfo.getRowCount() > 0)
+                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
                 {
                     startTime = System.nanoTime();
                     bds2.Remove((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
                     endTime = System.nanoTime();
+                    ClearFields();
                 }
             }
         }
         getExecTime(startTime,endTime);
-        ClearFields();
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
@@ -315,7 +324,11 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     
     public void getExecTime(long startTime, long endTime)
     {
-        lbl_nanoScnds.setText(String.valueOf(endTime - startTime));
+        DecimalFormat df = new DecimalFormat("#.#####");
+        df.setRoundingMode(RoundingMode.CEILING);
+        long elapsedTime = endTime - startTime;
+        Double inMiliSeconds = (double)elapsedTime/1000000000;
+        lbl_nanoScnds.setText(String.valueOf(elapsedTime) + " ( " + df.format(inMiliSeconds) + "s ) ");
     }
     /**
      * @param args the command line arguments
