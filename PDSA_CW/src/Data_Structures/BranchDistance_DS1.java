@@ -79,8 +79,8 @@ public class BranchDistance_DS1 {
             {
                 distances = new Distances();
                 distances.setDistanceId(rs.getInt(1));
-                distances.setFromBranchId(rs.getInt(5));
-                distances.setToBranchId(rs.getInt(1));
+                distances.setFromBranchId(rs.getInt(2));
+                distances.setToBranchId(rs.getInt(5));
                 distances.setDistance(rs.getString(8));
                 linkedListDistances.add(distances);
             }
