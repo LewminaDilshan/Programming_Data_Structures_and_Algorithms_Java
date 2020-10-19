@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="rbnGroup_fromTo">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -85,7 +89,7 @@
                                               </Group>
                                               <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace pref="35" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                                   <Component id="jLabel12" min="-2" max="-2" attributes="0"/>
@@ -108,32 +112,32 @@
                                                   <Component id="txt_toLocation" min="-2" pref="272" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
                                       </Group>
-                                      <Group type="102" alignment="0" attributes="0">
-                                          <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                              <Group type="102" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <Component id="btn_submit" min="-2" pref="147" max="-2" attributes="0"/>
                                                   <EmptySpace max="32767" attributes="0"/>
                                                   <Component id="btn_clear" min="-2" pref="147" max="-2" attributes="0"/>
                                               </Group>
-                                              <Group type="102" attributes="0">
+                                              <Group type="102" alignment="0" attributes="0">
                                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
                                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                                   <Component id="txt_distance" min="-2" pref="272" max="-2" attributes="0"/>
                                               </Group>
                                           </Group>
-                                          <EmptySpace max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="jScrollPane2" min="-2" pref="699" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
                                           <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Component id="lbl_nanoScnds" min="-2" pref="171" max="-2" attributes="0"/>
                                       </Group>
+                                      <Component id="jScrollPane2" min="-2" pref="939" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                               </Group>
@@ -200,7 +204,11 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="183" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <Component id="jScrollPane2" min="-2" pref="296" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                              </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -235,18 +243,17 @@
                                           <Component id="txt_fromLocation" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
-                                  <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
                                       <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="txt_distance" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btn_submit" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                      <Component id="btn_clear" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Component id="jScrollPane2" alignment="0" min="-2" pref="296" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="btn_submit" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="btn_clear" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -485,7 +492,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="15" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="From Branch Informations"/>
+            <Property name="text" type="java.lang.String" value="From Branch Information"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel12">
@@ -493,7 +500,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="15" style="1"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="To Branch Informations"/>
+            <Property name="text" type="java.lang.String" value="To Branch Information"/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -505,12 +512,19 @@
           <SubComponents>
             <Component class="javax.swing.JTable" name="tbl_branchDistance">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="15" style="0"/>
+                </Property>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="4" rowCount="0">
-                    <Column editable="false" title="Title 1" type="java.lang.Object"/>
-                    <Column editable="false" title="Title 2" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                    <Column editable="true" title="Title 4" type="java.lang.Object"/>
+                  <Table columnCount="8" rowCount="0">
+                    <Column editable="false" title="Distance ID" type="java.lang.String"/>
+                    <Column editable="false" title="From Branch ID" type="java.lang.String"/>
+                    <Column editable="false" title="From Branch Name" type="java.lang.String"/>
+                    <Column editable="false" title="From Location" type="java.lang.String"/>
+                    <Column editable="false" title="To Branch ID" type="java.lang.String"/>
+                    <Column editable="false" title="To Branch Name" type="java.lang.String"/>
+                    <Column editable="false" title="To Location" type="java.lang.String"/>
+                    <Column editable="false" title="Distance (KM)" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -525,7 +539,27 @@
                       <Editor/>
                       <Renderer/>
                     </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
                     <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                      <Title/>
+                      <Editor/>
+                      <Renderer/>
+                    </Column>
+                    <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                       <Title/>
                       <Editor/>
                       <Renderer/>
@@ -538,9 +572,12 @@
                   </TableColumnModel>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
-                  <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
+                  <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbl_branchDistanceMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -572,7 +609,7 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Tahoma" size="15" style="0"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Distance"/>
+            <Property name="text" type="java.lang.String" value="Distance (KM)"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="btn_submit">

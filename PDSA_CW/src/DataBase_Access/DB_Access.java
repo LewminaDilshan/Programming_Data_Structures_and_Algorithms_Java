@@ -74,7 +74,7 @@ public class DB_Access {
     
     public ResultSet BranchInfoLoad()
     {
-        String selectSql = "SELECT TOP 10 BranchId, BranchName, Location from Branches";
+        String selectSql = "SELECT * from Branches";
         
         ResultSet resultSet = null;
 
@@ -95,6 +95,76 @@ public class DB_Access {
     {
         String deleteSql = "Update Branches set BranchName = '"+arry[1]+"', Location = '"+arry[2]+"' where BranchId = '"+arry[0]+"';";
         
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
+    public ResultSet BranchDistanceLoad()
+    {
+        String selectSql = "SELECT D.DistanceId, D.FromBranchId, FB.BranchName, FB.Location, D.ToBranchId, TB.BranchName, TB.Location, D.Distance from Distances D inner join Branches FB on D.FromBranchId = FB.BranchId inner join Branches TB on D.ToBranchId = TB.BranchId";
+        
+        ResultSet resultSet = null;
+
+        try 
+        {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(selectSql);
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return resultSet;
+    }
+    
+    public int BranchDistanceInsert(String[] arry)
+    {
+        String insertSql = "INSERT INTO Distances VALUES ('"+arry[0]+"', '"+arry[1]+"', '"+arry[4]+"', '"+arry[7]+"');";
+
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
+    public int BranchDistanceUpdate(String[] arry)
+    {
+        String deleteSql = "Update Distances set FromBranchId = '"+arry[1]+"', ToBranchId = '"+arry[4]+"', Distance = '"+arry[7]+"' where DistanceId = '"+arry[0]+"';";
+        
+        int count = 0;
+        try 
+        {
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            count = prepsInsertProduct.executeUpdate();
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return count;
+    }
+    
+    public int BranchDistanceDelete(String id)
+    {
+        String deleteSql = "Delete from Distances where DistanceId = '"+id+"';";
+
         int count = 0;
         try 
         {
