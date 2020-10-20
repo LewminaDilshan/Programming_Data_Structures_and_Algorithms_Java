@@ -8,21 +8,31 @@ package UI;
 import Data_Structures.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
  * @author lewmi
  */
-public class BranchDistance_Screen extends javax.swing.JFrame {
+public final class BranchDistance_Screen extends javax.swing.JFrame {
 
     /**
      * Creates new form BranchDistance_Screen
      */
     BranchDistance_DS1 branchDistanceOne;
     BranchDistance_DS2 bdds2;
+    TableRowSorter sorting;
     
     public BranchDistance_Screen() {
         initComponents();
+        txt_distance.setEditable(false);
         branchDistanceOne = new BranchDistance_DS1();
         branchDistanceOne.LoadBranchInfomation(tbl_branchInfo);
         bdds2 = new BranchDistance_DS2();
@@ -30,6 +40,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         rbnGroup_fromTo.add(rbn_fromBranch);
         rbnGroup_fromTo.add(rbn_ToBranch);
         rbn_fromBranch.setSelected(true);
+        BranchInformationSearch(tbl_branchInfo);
     }
 
     /**
@@ -441,6 +452,14 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
 
     private void cmb_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_actionActionPerformed
         // TODO add your handling code here:
+        if(cmb_action.getSelectedIndex()== 0 || cmb_action.getSelectedIndex()== 1 || cmb_action.getSelectedIndex()== 4 )
+        {
+            txt_distance.setEditable(false);
+        }
+        else if(cmb_action.getSelectedIndex()== 2 || cmb_action.getSelectedIndex()== 3)
+        {
+            txt_distance.setEditable(true);
+        }
         ClearFields();
         lbl_nanoScnds.setText("");
     }//GEN-LAST:event_cmb_actionActionPerformed
@@ -469,6 +488,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
+       
         ClearFields();
         lbl_nanoScnds.setText("");
     }//GEN-LAST:event_btn_clearActionPerformed
@@ -480,14 +500,14 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         
         if(cmb_action.getSelectedIndex() == 1)
         {
-            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 3)
             {
                 startTime = System.nanoTime();
                 branchDistanceOne.LoadDistanceInformation(tbl_branchDistance);
                 endTime = System.nanoTime();
                 ClearFields();
             }
-            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            else if(cmb_Program.getSelectedIndex() == 2 || cmb_Program.getSelectedIndex() == 4)
             {
                 startTime = System.nanoTime();
                 bdds2.Load(tbl_branchDistance);
@@ -497,47 +517,97 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 2)
         {
-            if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2))
+            if(tbl_branchDistance.getRowCount() != 0)
             {
-                startTime = System.nanoTime();
-                branchDistanceOne.InsertDistanceInformation(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
-                endTime = System.nanoTime();
-                ClearFields();
+                if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty()  && (cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 3))
+                {
+                    if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                    {
+                        if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText())).equals(false))
+                        {
+                            startTime = System.nanoTime();
+                            branchDistanceOne.InsertDistanceInformation(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
+                            endTime = System.nanoTime();
+                            ClearFields();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                        }
+                        
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                    }
+                }
+                else if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 2 || cmb_Program.getSelectedIndex() == 4))
+                {
+                    if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                    {
+                        startTime = System.nanoTime();
+                        bdds2.Add(txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                    }
+                }
             }
-            else if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
+            else
             {
-                startTime = System.nanoTime();
-                bdds2.Add(txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
-                endTime = System.nanoTime();
-                ClearFields();
+                JOptionPane.showMessageDialog(null, "Please load distance table data first.", "Error", 0);
             }
         }
         else if(cmb_action.getSelectedIndex() == 3)
         {
-            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 3)
             {
-                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty())
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty())
                 {
-                    startTime = System.nanoTime();
-                    branchDistanceOne.UpdateDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
-                    endTime = System.nanoTime();
-                    ClearFields();
+                    if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                    {
+                        if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText())).equals(false))
+                        {
+                            startTime = System.nanoTime();
+                            branchDistanceOne.UpdateDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
+                            endTime = System.nanoTime();
+                            ClearFields();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                    }
                 }
             }
-            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            else if(cmb_Program.getSelectedIndex() == 2 || cmb_Program.getSelectedIndex() == 4)
             {
-                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() && !txt_distance.getText().isEmpty())
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() )
                 {
+                    if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                    {
                     startTime = System.nanoTime();
                     bdds2.Update((String)tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0), txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
                     endTime = System.nanoTime();
                     ClearFields();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                    }
                 }
             }
         }
         else if(cmb_action.getSelectedIndex() == 4)
         {
-            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
+            if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 3)
             {
                 if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0)
                 {
@@ -547,7 +617,7 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
                     ClearFields();
                 }
             }
-            else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
+            else if(cmb_Program.getSelectedIndex() == 2 || cmb_Program.getSelectedIndex() == 4)
             {
                 if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0)
                 {
@@ -578,6 +648,47 @@ public class BranchDistance_Screen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tbl_branchDistanceMouseClicked
 
+    public void BranchInformationSearch(JTable branchInfo)
+    {
+        try
+        {
+             DefaultTableModel model = (DefaultTableModel) branchInfo.getModel();
+             sorting = new TableRowSorter<>(model);
+             branchInfo.setRowSorter(sorting);
+             txt_search.getDocument().addDocumentListener(new DocumentListener() {
+                 @Override
+                 public void insertUpdate(DocumentEvent e) {
+                     Search(txt_search.getText());
+                 }
+
+                 @Override
+                 public void removeUpdate(DocumentEvent e) {
+                     Search(txt_search.getText());
+                 }
+
+                 @Override
+                 public void changedUpdate(DocumentEvent e) {
+                     Search(txt_search.getText());
+                 }
+             });
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void Search(String text)
+    {
+        if(text.length()==0)
+        {
+            sorting.setRowFilter(null);
+        }
+        else
+        {
+            sorting.setRowFilter(RowFilter.regexFilter(text));
+        }
+    }
     private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
         // TODO add your handling code here:
         Home_Screen home = new Home_Screen();
