@@ -10,7 +10,7 @@ CREATE TABLE Branches (
 );
 
 CREATE TABLE Distances (
-	DistanceId int IDENTITY(1,1) NOT NULL,
+	DistanceId int NOT NULL,
 	FromBranchId int  NOT NULL,
 	ToBranchId int  NOT NULL,
 	Distance numeric(18,2) NOT NULL,
