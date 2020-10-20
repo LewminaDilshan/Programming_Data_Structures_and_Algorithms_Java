@@ -75,7 +75,7 @@ public class BranchInfo_DS1 {
             }
             else if(branchInfo.getRowCount() == 0)
             {
-                branch.setBranchId(0);
+                branch.setBranchId(1);
             }
             branch.setBranchName(branchName);
             branch.setLocation(branchLocation); 

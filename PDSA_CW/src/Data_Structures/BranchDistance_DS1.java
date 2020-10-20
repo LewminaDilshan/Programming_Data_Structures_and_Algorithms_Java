@@ -130,7 +130,7 @@ public class BranchDistance_DS1 {
             }
             else if(distanceInfo.getRowCount() == 0)
             {
-                distances.setDistanceId(0);
+                distances.setDistanceId(1);
             }
             distances.setFromBranchId(fromBranchId);
             distances.setToBranchId(toBranchId); 
@@ -255,7 +255,7 @@ public class BranchDistance_DS1 {
             DefaultTableModel model = (DefaultTableModel) distanceInfo.getModel();
             model.setRowCount(0);
             Object[] row = new Object[8];
-           for (Distances d : linkedListDistances)
+            for (Distances d : linkedListDistances)
             {
                 row[0] = d.getDistanceId();
                 linkedListBranches.forEach((b) -> {
@@ -284,5 +284,18 @@ public class BranchDistance_DS1 {
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    public Boolean ValidateDistances(int fromBranchId, int toBranchId)
+    {
+        Boolean res =false;
+         for (Distances d : linkedListDistances)
+            {
+                if(d.getFromBranchId() == fromBranchId && d.getToBranchId() == toBranchId || d.getFromBranchId() == toBranchId && d.getToBranchId() == fromBranchId )
+                {
+                  res = true;
+                }
+            }
+        return res;
     }
 }

@@ -8,6 +8,7 @@ package UI;
 import Data_Structures.*;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -24,6 +25,8 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
     public BranchInfo_Screen() {
         initComponents();
+        txt_branchName.setEditable(false);
+        txt_location.setEditable(false);
         dataStructureOne = new BranchInfo_DS1();
         bds2 = new BranchInfo_DS2();
     }
@@ -274,19 +277,40 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         }
         else if(cmb_action.getSelectedIndex() == 2)
         {
-            if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2))
+            if(tbl_branchInfo.getRowCount() != 0)
             {
-                startTime = System.nanoTime();
-                dataStructureOne.InsertBranchInformation(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                endTime = System.nanoTime();
-                ClearFields();
+                if((cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2))
+                {
+                    if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                    {
+                        startTime = System.nanoTime();
+                        dataStructureOne.InsertBranchInformation(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+                else if((cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
+                {
+                    if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                    {
+                        startTime = System.nanoTime();
+                        bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
-            else if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty() && (cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
+            else
             {
-                startTime = System.nanoTime();
-                bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                endTime = System.nanoTime();
-                ClearFields();
+                JOptionPane.showMessageDialog(null, "Please load distance table data first.", "Error", 0);
             }
         }
         else if(cmb_action.getSelectedIndex() == 3)
@@ -300,6 +324,10 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                     endTime = System.nanoTime();
                     ClearFields();
                 }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
             }
             else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
@@ -309,6 +337,10 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
                     bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
                     endTime = System.nanoTime();
                     ClearFields();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -358,6 +390,16 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
 
     private void cmb_actionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmb_actionActionPerformed
         // TODO add your handling code here:
+        if(cmb_action.getSelectedIndex()== 0 || cmb_action.getSelectedIndex()== 1 || cmb_action.getSelectedIndex()== 4 )
+        {
+            txt_branchName.setEditable(false);
+            txt_location.setEditable(false);
+        }
+        else if(cmb_action.getSelectedIndex()== 2 || cmb_action.getSelectedIndex()== 3)
+        {
+            txt_branchName.setEditable(true);
+            txt_location.setEditable(true);
+        }
         ClearFields();
         lbl_nanoScnds.setText("");
     }//GEN-LAST:event_cmb_actionActionPerformed
