@@ -181,4 +181,17 @@ public class BranchDistance_DS2 {
             model.addRow(row);
         }
     }
+    
+    public Boolean ValidateDistances(String fromBranchId, String toBranchId)
+    {
+        Boolean res =false;
+        for (String[] s : BranchDistanceQueue)
+        {
+            if(s[1].equals(fromBranchId) && s[4].equals(toBranchId) || s[1].equals(toBranchId) && s[4].equals(fromBranchId) )
+            {
+              res = true;
+            }
+        }
+        return res;
+    }
 }
