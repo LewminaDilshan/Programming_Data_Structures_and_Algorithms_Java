@@ -22,6 +22,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
     
     BranchInfo_DS1 dataStructureOne;
     BranchInfo_DS2 bds2;
+    Boolean isLoadByDSone = null;
 
     public BranchInfo_Screen() {
         initComponents();
@@ -262,6 +263,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         {
             if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
             {
+                isLoadByDSone = true;
                 startTime = System.nanoTime();
                 dataStructureOne.LoadBranchInformation(tbl_branchInfo);
                 endTime = System.nanoTime();
@@ -269,6 +271,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             }
             else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
+                isLoadByDSone = false;
                 startTime = System.nanoTime();
                 bds2.Load(tbl_branchInfo);
                 endTime = System.nanoTime();
@@ -280,31 +283,45 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             if(tbl_branchInfo.getRowCount() != 0)
             {
                 if((cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2))
-                {
-                    if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                { 
+                    if(isLoadByDSone.equals(true))
                     {
-                        startTime = System.nanoTime();
-                        dataStructureOne.InsertBranchInformation(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                        endTime = System.nanoTime();
-                        ClearFields();
+                        if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                        {
+                            startTime = System.nanoTime();
+                            dataStructureOne.InsertBranchInformation(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                            endTime = System.nanoTime();
+                            ClearFields();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Please perfrom LOAD Operation using same programme.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
                 else if((cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4))
                 {
-                    if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                    if(isLoadByDSone.equals(false))
                     {
-                        startTime = System.nanoTime();
-                        bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                        endTime = System.nanoTime();
-                        ClearFields();
+                        if(!txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                        {
+                            startTime = System.nanoTime();
+                            bds2.Add(txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                            endTime = System.nanoTime();
+                            ClearFields();
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Please perfrom LOAD Operation using same programme.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -317,30 +334,44 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         {
             if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
             {
-                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                if(isLoadByDSone.equals(true))
                 {
-                    startTime = System.nanoTime();
-                    dataStructureOne.UpdateBranchInformation((Integer)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                    endTime = System.nanoTime();
-                    ClearFields();
+                    if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                    {
+                        startTime = System.nanoTime();
+                        dataStructureOne.UpdateBranchInformation((Integer)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Please perfrom LOAD Operation using same programme.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
             else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
-                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                if(isLoadByDSone.equals(false))
                 {
-                    startTime = System.nanoTime();
-                    bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
-                    endTime = System.nanoTime();
-                    ClearFields();
+                    if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0 && !txt_branchName.getText().isEmpty() && !txt_location.getText().isEmpty())
+                    {
+                        startTime = System.nanoTime();
+                        bds2.Update((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), txt_branchName.getText(), txt_location.getText(), tbl_branchInfo);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null,"Branch Name or Location cannot be empty.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Please perfrom LOAD Operation using same programme.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
@@ -348,22 +379,36 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
         {
             if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 2)
             {
-                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
+                if(isLoadByDSone.equals(true))
                 {
-                    startTime = System.nanoTime();
-                    dataStructureOne.DeleteBranchInformation((Integer)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
-                    endTime = System.nanoTime();
-                    ClearFields();
+                    if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
+                    {
+                        startTime = System.nanoTime();
+                        dataStructureOne.DeleteBranchInformation((Integer)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Please perfrom LOAD Operation using same programme.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
             else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
-                if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
+                if(isLoadByDSone.equals(true))
                 {
-                    startTime = System.nanoTime();
-                    bds2.Remove((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
-                    endTime = System.nanoTime();
-                    ClearFields();
+                    if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
+                    {
+                        startTime = System.nanoTime();
+                        bds2.Remove((String)tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0), tbl_branchInfo);
+                        endTime = System.nanoTime();
+                        ClearFields();
+                    }
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Please perfrom LOAD Operation using same programme.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
