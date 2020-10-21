@@ -289,13 +289,13 @@ public class BranchDistance_DS1 {
     public Boolean ValidateDistances(int fromBranchId, int toBranchId)
     {
         Boolean res =false;
-         for (Distances d : linkedListDistances)
+        for (Distances d : linkedListDistances)
+        {
+            if(d.getFromBranchId() == fromBranchId && d.getToBranchId() == toBranchId || d.getFromBranchId() == toBranchId && d.getToBranchId() == fromBranchId )
             {
-                if(d.getFromBranchId() == fromBranchId && d.getToBranchId() == toBranchId || d.getFromBranchId() == toBranchId && d.getToBranchId() == fromBranchId )
-                {
-                  res = true;
-                }
+              res = true;
             }
+        }
         return res;
     }
 }
