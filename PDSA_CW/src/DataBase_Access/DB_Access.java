@@ -18,15 +18,15 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 
 public class DB_Access {
-    // Connect to your database.
+    // Connect to your database. 
     // Replace server name, username, and password with your credentials
     Connection connection;
 
     public DB_Access()
     {       
-        String url = "jdbc:sqlserver://MSI\\SQLFULL:1433;databaseName=PDSACourseWork;";
+        String url = "jdbc:sqlserver://PASAN\\SQLFULL:1433;databaseName=PDSACourseWork;";
         String user = "sa";
-        String pass = "12345";
+        String pass = "020396";
 
         try  {
             connection = DriverManager.getConnection(url,user, pass);

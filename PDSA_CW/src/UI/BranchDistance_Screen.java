@@ -28,7 +28,7 @@ public final class BranchDistance_Screen extends javax.swing.JFrame {
      */
     BranchDistance_DS1 branchDistanceOne;
     BranchDistance_DS2 bdds2;
-    TableRowSorter sorting;
+    TableRowSorter sorting;  
     Boolean isDS1;
     
     public BranchDistance_Screen() {

@@ -327,7 +327,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "Please load distance table data first.", "Error", 0);
+                JOptionPane.showMessageDialog(null, "Please load branch table data first.", "Error", 0);
             }
         }
         else if(cmb_action.getSelectedIndex() == 3)
