@@ -24,9 +24,9 @@ public class DB_Access {
 
     public DB_Access()
     {       
-        String url = "jdbc:sqlserver://PASAN\\SQLFULL:1433;databaseName=PDSACourseWork;";
+        String url = "jdbc:sqlserver://MSI\\SQLFULL:1433;databaseName=PDSACourseWork;";
         String user = "sa";
-        String pass = "020396";
+        String pass = "12345";
 
         try  {
             connection = DriverManager.getConnection(url,user, pass);
