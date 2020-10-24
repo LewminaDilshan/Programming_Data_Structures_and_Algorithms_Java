@@ -135,7 +135,7 @@ public class ShortestPath_DS {
         CreateGraph();
     }
     
-    private static void getRoute(int[] prev, int i, List<Integer> route)
+    private void getRoute(int[] prev, int i, List<Integer> route)
     {
         if (i >= 0) {
             getRoute(prev, prev[i], route);
@@ -144,7 +144,7 @@ public class ShortestPath_DS {
     }
 
     // Run Dijkstra's algorithm on given graph
-    public static void shortestPath(Graph graph, int source, int N, JTextArea ta)
+    public void shortestPath(Graph graph, int source, int N, JTextArea ta)
     {
         PriorityQueue<Node> minHeap = new PriorityQueue<>(Comparator.comparingInt(node -> node.weight));
         minHeap.add(new Node(source, 0));
@@ -181,12 +181,26 @@ public class ShortestPath_DS {
 
             done[u] = true;
         }
+        String fromBranchName = null;
+        for(String[] s : BranchInfoQueue) {
+            if(s[0].equals(String.valueOf(source)))
+            {
+                fromBranchName = s[1];
+            }
+        }
         
         for (int i = 1; i < N; ++i)
         {
+            String ToBranchName = null;
             if (i != source && dist.get(i) != Integer.MAX_VALUE) {
                 getRoute(prev, i, route);
-                ta.setText(ta.getText() + "\n" + "From : " + source + "    To : " + i + "    |    Distance : " + dist.get(i) + "    |    Route :" + route);
+                for(String[] s : BranchInfoQueue) {
+                    if(s[0].equals(String.valueOf(i)))
+                    {
+                        ToBranchName = s[1];
+                    }
+                }
+                ta.setText(ta.getText() + "\n" + "From Branch : " + fromBranchName + "    To Branch : " + ToBranchName + "    |    Distance : " + dist.get(i) + "    |    Route :" + route);
                 route.clear();
             }
         }
