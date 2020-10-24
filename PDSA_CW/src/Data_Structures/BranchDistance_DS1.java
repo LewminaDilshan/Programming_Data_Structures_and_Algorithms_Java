@@ -298,17 +298,4 @@ public class BranchDistance_DS1 {
         }
         return res;
     }
-    
-     public Boolean ValidateDistances(int fromBranchId, int toBranchId, String distance)
-    {
-        Boolean res =false;
-        for (Distances d : linkedListDistances)
-        {
-            if(d.getFromBranchId() == fromBranchId && d.getToBranchId() == toBranchId && d.getDistance().equals(distance) || d.getFromBranchId() == toBranchId && d.getToBranchId() == fromBranchId && d.getDistance().equals(distance))
-            {
-              res = true;
-            }
-        }
-        return res;
-    }
 }

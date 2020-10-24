@@ -596,7 +596,7 @@ public final class BranchDistance_Screen extends javax.swing.JFrame {
                     {
                         if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
                         {
-                            if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText()).equals(false))
+                            if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText())).equals(false))
                             {
                                 startTime = System.nanoTime();
                                 branchDistanceOne.UpdateDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
