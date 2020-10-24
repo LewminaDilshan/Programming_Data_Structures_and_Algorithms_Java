@@ -177,39 +177,46 @@ public class ShortestPath_DS {
 
             done[u] = true;
         }
-
+        
         for (int i = 1; i < N; ++i)
         {
             if (i != source && dist.get(i) != Integer.MAX_VALUE) {
                 getRoute(prev, i, route);
-                ta.setText("Source : " + source + " --> " + i + " | Distance : " + dist.get(i) + " | Route :" + route);
+                ta.setText(ta.getText() + "\n" + "From : " + source + "    To : " + i + "    |    Distance : " + dist.get(i) + "    |    Route :" + route);
                 route.clear();
             }
         }
     }
     
-    public void PrintShortestPath(JTextArea ta)
+    public void PrintShortestPath(JTextArea ta, int source)
     {
-        List<Edge> edges =  Arrays.asList(
-            new Edge(0, 1, 10), new Edge(0, 4, 3),
-            new Edge(1, 2, 2), new Edge(1, 4, 4),
-            new Edge(2, 3, 9), new Edge(3, 2, 7),
-            new Edge(4, 1, 1), new Edge(4, 2, 8),
-            new Edge(4, 3, 2)
-        );
+        ArrayList<Edge> edges =  new ArrayList<Edge>();
 
-//        for(String[] s : BranchDistanceQueue) { 
-//            edges.add(new Edge(Integer.parseInt(s[1]), Integer.parseInt(s[4]), 10));
-//            edges.add(new Edge(Integer.parseInt(s[4]), Integer.parseInt(s[1]), 20));
-//        }
+        for(String[] s : BranchDistanceQueue) {
+            double dist = Double.parseDouble(s[7]);
+            edges.add(new Edge(Integer.parseInt(s[1]), Integer.parseInt(s[4]), (int)dist));
+            edges.add(new Edge(Integer.parseInt(s[4]), Integer.parseInt(s[1]), (int)dist));
+        }
 
         // Set number of vertices in the graph
-        final int N = 5;
-
+        int NumberOfVertex = 0;
+        
+        ResultSet rs = db.GetDistancesCount();
+        BranchDistanceQueue.clear();
+        try{
+            while(rs.next())
+            {
+                NumberOfVertex = rs.getInt(1) + 1;
+            }
+        }
+        catch(SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
         // construct graph
-        Graph graph = new Graph(edges, N);
+        Graph graph = new Graph(edges, NumberOfVertex);
 
-        int source = 0;
-        shortestPath(graph, source, N, ta);
+        shortestPath(graph, source, NumberOfVertex, ta);
     }      
 }

@@ -258,7 +258,8 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-        sds.PrintShortestPath(txtArea_shortestPath);
+        txtArea_shortestPath.setText("");
+        sds.PrintShortestPath(txtArea_shortestPath, Integer.parseInt(txt_BranchId.getText()));
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
