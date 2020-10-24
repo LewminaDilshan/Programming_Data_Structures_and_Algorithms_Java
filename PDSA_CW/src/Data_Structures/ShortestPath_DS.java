@@ -71,7 +71,7 @@ public class ShortestPath_DS {
     Queue<String[]> BranchInfoQueue;
     Queue<String[]> BranchDistanceQueue;
     DB_Access db;
-    int NumberOfVertex = 0;
+    int MaxBranchId = 0;
     Graph graph;
     
     public ShortestPath_DS()
@@ -83,7 +83,7 @@ public class ShortestPath_DS {
     
     public void LoadBranchInfo(JTable jt)
     {
-        ResultSet rs = db.BranchInfoLoad();
+        ResultSet rs = db.BranchInformationLoad();
         BranchInfoQueue.clear();
         try{
             while(rs.next())
@@ -144,7 +144,7 @@ public class ShortestPath_DS {
     }
 
     // Run Dijkstra's algorithm on given graph
-    public void shortestPath(Graph graph, int source, int N, JTextArea ta)
+    public void shortestPath(Graph graph, int source, int N, JTextArea txtArea)
     {
         PriorityQueue<Node> minHeap = new PriorityQueue<>(Comparator.comparingInt(node -> node.weight));
         minHeap.add(new Node(source, 0));
@@ -191,16 +191,16 @@ public class ShortestPath_DS {
         
         for (int i = 1; i < N; ++i)
         {
-            String ToBranchName = null;
+            String toBranchName = null;
             if (i != source && dist.get(i) != Integer.MAX_VALUE) {
                 getRoute(prev, i, route);
                 for(String[] s : BranchInfoQueue) {
                     if(s[0].equals(String.valueOf(i)))
                     {
-                        ToBranchName = s[1];
+                        toBranchName = s[1];
                     }
                 }
-                ta.setText(ta.getText() + "\n" + "From Branch : " + fromBranchName + "    To Branch : " + ToBranchName + "    |    Distance : " + dist.get(i) + "    |    Route :" + route);
+                txtArea.setText(txtArea.getText()+ "From Branch : - " + fromBranchName + "\nTo Branch : - " + toBranchName + "    \nDistance : - " + dist.get(i) + "    \nRoute : - " + route +"\n\n");
                 route.clear();
             }
         }
@@ -217,13 +217,12 @@ public class ShortestPath_DS {
         }
 
         // Set number of vertices in the graph
-
-        ResultSet rs2 = db.GetDistancesCount();
+        ResultSet rs2 = db.GetMaximumBranchId();
         BranchDistanceQueue.clear();
         try{
             while(rs2.next())
             {
-                NumberOfVertex = rs2.getInt(1) + 1;
+                MaxBranchId = rs2.getInt(1) + 1;
             }
         }
         catch(SQLException e)
@@ -232,11 +231,11 @@ public class ShortestPath_DS {
         }
 
         // construct graph
-        graph = new Graph(edges, NumberOfVertex);
+        graph = new Graph(edges, MaxBranchId);
     }
     
-    public void PrintShortestPath(JTextArea ta, int source)
+    public void PrintShortestPath(JTextArea txtArea, int source)
     {    
-        shortestPath(graph, source, NumberOfVertex, ta);
+        shortestPath(graph, source, MaxBranchId, txtArea);
     }      
 }

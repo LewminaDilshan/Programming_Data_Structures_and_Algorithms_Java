@@ -526,25 +526,32 @@ public final class BranchDistance_Screen extends javax.swing.JFrame {
                 if(!txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty()  && (cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 3))
                 {
                     if(isDS1.equals(true))
-                    {
-                        if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                    {  
+                        if(!txt_fromBranchId.getText().equals(txt_toBranchId.getText()))
                         {
-                            if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText())).equals(false))
+                            if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
                             {
-                                startTime = System.nanoTime();
-                                branchDistanceOne.InsertDistanceInformation(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
-                                endTime = System.nanoTime();
-                                ClearFields();
+                                if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText())).equals(false))
+                                {
+                                    startTime = System.nanoTime();
+                                    branchDistanceOne.InsertDistanceInformation(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
+                                    endTime = System.nanoTime();
+                                    ClearFields();
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                }
+
                             }
                             else
                             {
-                                JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
                             }
-
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                            JOptionPane.showMessageDialog(null, "From Branch and To Branch cannot be same.", "Error", 0);
                         }
                     }
                     else
@@ -556,23 +563,30 @@ public final class BranchDistance_Screen extends javax.swing.JFrame {
                 {
                     if(isDS1.equals(false))
                     {
-                        if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                        if(!txt_fromBranchId.getText().equals(txt_toBranchId.getText()))
                         {
-                            if(bdds2.ValidateDistances(txt_fromBranchId.getText(), txt_toBranchId.getText()).equals(false))
+                            if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
                             {
-                                startTime = System.nanoTime();
-                                bdds2.Add(txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
-                                endTime = System.nanoTime();
-                                ClearFields();
+                                if(bdds2.ValidateDistances(txt_fromBranchId.getText(), txt_toBranchId.getText()).equals(false))
+                                {
+                                    startTime = System.nanoTime();
+                                    bdds2.Add(txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
+                                    endTime = System.nanoTime();
+                                    ClearFields();
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                }
                             }
                             else
                             {
-                                JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
                             }
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                            JOptionPane.showMessageDialog(null, "From Branch and To Branch cannot be same.", "Error", 0);
                         }
                     }
                     else
@@ -590,27 +604,34 @@ public final class BranchDistance_Screen extends javax.swing.JFrame {
         {
             if(cmb_Program.getSelectedIndex() == 1 || cmb_Program.getSelectedIndex() == 3)
             {
-                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty())
+                if(tbl_branchDistance.getRowCount() > 0 && tbl_branchDistance.getSelectedRowCount() > 0 && !txt_fromBranchId.getText().isEmpty() && !txt_toBranchId.getText().isEmpty() )
                 {
                     if(isDS1.equals(true))
                     {
-                        if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                        if(!txt_fromBranchId.getText().equals(txt_toBranchId.getText()))
                         {
-                            if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText()).equals(false))
+                            if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
                             {
-                                startTime = System.nanoTime();
-                                branchDistanceOne.UpdateDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
-                                endTime = System.nanoTime();
-                                ClearFields();
+                                if(branchDistanceOne.ValidateDistances(Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText()).equals(false))
+                                {
+                                    startTime = System.nanoTime();
+                                    branchDistanceOne.UpdateDistanceInformation(Integer.parseInt(String.valueOf(tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0))), Integer.parseInt(txt_fromBranchId.getText()), Integer.parseInt(txt_toBranchId.getText()), txt_distance.getText(), tbl_branchDistance);
+                                    endTime = System.nanoTime();
+                                    ClearFields();
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                }
                             }
                             else
                             {
-                                JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
                             }
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                            JOptionPane.showMessageDialog(null, "From Branch and To Branch cannot be same.", "Error", 0);
                         }
                     }
                     else
@@ -625,23 +646,30 @@ public final class BranchDistance_Screen extends javax.swing.JFrame {
                 {
                     if(isDS1.equals(false))
                     {
-                        if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
+                        if(!txt_fromBranchId.getText().equals(txt_toBranchId.getText()))
                         {
-                            if(bdds2.ValidateDistances(txt_fromBranchId.getText(), txt_toBranchId.getText()).equals(false))
+                            if(!txt_distance.getText().isEmpty() && txt_distance.getText().matches("^[0-9]*$"))
                             {
-                                startTime = System.nanoTime();
-                                bdds2.Update((String)tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0), txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
-                                endTime = System.nanoTime();
-                                ClearFields();
+                                if(bdds2.ValidateDistances(txt_fromBranchId.getText(), txt_toBranchId.getText(), txt_distance.getText()).equals(false))
+                                {
+                                    startTime = System.nanoTime();
+                                    bdds2.Update((String)tbl_branchDistance.getValueAt(tbl_branchDistance.getSelectedRow(), 0), txt_fromBranchId.getText(), txt_fromBranchName.getText(), txt_fromLocation.getText(), txt_toBranchId.getText(), txt_toBranchName.getText(), txt_toLocation.getText(), txt_distance.getText(), tbl_branchDistance);
+                                    endTime = System.nanoTime();
+                                    ClearFields();
+                                }
+                                else
+                                {
+                                    JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                }
                             }
                             else
                             {
-                                JOptionPane.showMessageDialog(null, "The record alredy exists for FromBranch and ToBranch provided.", "Error", 0);
+                                JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
                             }
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Distance can not be blank or invalid pattern. Please check that field.", "Error", 0);
+                            JOptionPane.showMessageDialog(null, "From Branch and To Branch cannot be same.", "Error", 0);
                         }
                     }
                     else

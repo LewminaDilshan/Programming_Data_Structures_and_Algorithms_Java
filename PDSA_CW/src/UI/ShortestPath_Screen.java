@@ -330,12 +330,15 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
             sorting.setRowFilter(RowFilter.regexFilter(text));
         }
     }
+   
     public void ClearFields()
     {
+        txt_search.setText("");
         txt_BranchId.setText("");
         txt_BranchName.setText("");
         txt_Location.setText("");
         txtArea_shortestPath.setText("");
+        lbl_nanoScnds.setText("");
     }
     
     public void getExecTime(long startTime, long endTime)

@@ -24,9 +24,9 @@ public class DB_Access {
 
     public DB_Access()
     {       
-        String url = "jdbc:sqlserver://MSI\\SQLFULL:1433;databaseName=PDSACourseWork;";
+        String url = "jdbc:sqlserver://PASANSENA\\SQLFULL:1433;databaseName=PDSACourseWork;";
         String user = "sa";
-        String pass = "12345";
+        String pass = "020396";
 
         try  {
             connection = DriverManager.getConnection(url,user, pass);
@@ -113,6 +113,25 @@ public class DB_Access {
     public ResultSet BranchInfoLoad()
     {
         String selectSql = "SELECT * from Branches";
+        
+        ResultSet resultSet = null;
+
+        try 
+        {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(selectSql);
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return resultSet;
+    }
+    
+    public ResultSet BranchInformationLoad()
+    {
+        String selectSql = "SELECT Main.BranchId, Main.BranchName, Main.Location FROM (SELECT DISTINCT B.BranchId, B.BranchName, B.Location FROM Branches B INNER JOIN Distances D ON D.FromBranchId = B.BranchId UNION SELECT DISTINCT B.BranchId, B.BranchName, B.Location FROM Branches B INNER JOIN Distances D ON D.ToBranchId = B.BranchId)Main;";
         
         ResultSet resultSet = null;
 
@@ -284,19 +303,9 @@ public class DB_Access {
         return count;
     }
     
-    public ResultSet GetDistancesCount()
+    public ResultSet GetMaximumBranchId()
     {
-        String selectSql = "SELECT COUNT(Main.BranchId) AS NumberOfBranches FROM \n" +
-                                "(\n" +
-                                "	SELECT DISTINCT B.BranchId FROM Branches B\n" +
-                                "	INNER JOIN Distances D\n" +
-                                "	ON D.FromBranchId = B.BranchId\n" +
-                                "	UNION \n" +
-                                "	SELECT DISTINCT B.BranchId FROM Branches B\n" +
-                                "	INNER JOIN Distances D\n" +
-                                "	ON D.ToBranchId = B.BranchId\n" +
-                                ")\n" +
-                                "Main;";
+        String selectSql = "SELECT MAX(BranchId) AS MaximumBranchId from Branches;";
       
         ResultSet resultSet = null;
 
