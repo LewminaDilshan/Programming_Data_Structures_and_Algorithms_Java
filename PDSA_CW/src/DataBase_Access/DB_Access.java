@@ -24,7 +24,7 @@ public class DB_Access {
 
     public DB_Access()
     {       
-        String url = "jdbc:sqlserver://PASAN\\SQLFULL:1433;databaseName=PDSACourseWork;";
+        String url = "jdbc:sqlserver://PASANSENA\\SQLFULL:1433;databaseName=PDSACourseWork;";
         String user = "sa";
         String pass = "020396";
 
@@ -131,12 +131,12 @@ public class DB_Access {
     
     public int BranchInfoUpdate(String[] arry)
     {
-        String deleteSql = "Update Branches set BranchName = '"+arry[1]+"', Location = '"+arry[2]+"' where BranchId = '"+arry[0]+"';";
+        String updateSql = "Update Branches set BranchName = '"+arry[1]+"', Location = '"+arry[2]+"' where BranchId = '"+arry[0]+"';";
         
         int count = 0;
         try 
         {
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(updateSql, Statement.RETURN_GENERATED_KEYS);
             count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
@@ -148,12 +148,12 @@ public class DB_Access {
     
     public int BranchInfoUpdate(int branchId, String branchName, String branchLocation)
     {
-        String deleteSql = "Update Branches set BranchName = '"+branchName+"', Location = '"+branchLocation+"' where BranchId = '"+branchId+"';";
+        String updateSql = "Update Branches set BranchName = '"+branchName+"', Location = '"+branchLocation+"' where BranchId = '"+branchId+"';";
         
         int count = 0;
         try 
         {
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(updateSql, Statement.RETURN_GENERATED_KEYS);
             count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
@@ -218,12 +218,12 @@ public class DB_Access {
     
     public int BranchDistanceUpdate(String[] arry)
     {
-        String deleteSql = "Update Distances set FromBranchId = '"+arry[1]+"', ToBranchId = '"+arry[4]+"', Distance = '"+arry[7]+"' where DistanceId = '"+arry[0]+"';";
+        String updateSql = "Update Distances set FromBranchId = '"+arry[1]+"', ToBranchId = '"+arry[4]+"', Distance = '"+arry[7]+"' where DistanceId = '"+arry[0]+"';";
         
         int count = 0;
         try 
         {
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(updateSql, Statement.RETURN_GENERATED_KEYS);
             count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
@@ -235,12 +235,12 @@ public class DB_Access {
     
      public int BranchDistanceUpdate(int distanceId, int fromBranchId, int toBranchId, String distance)
     {
-        String deleteSql = "Update Distances set FromBranchId = '"+fromBranchId+"', ToBranchId = '"+toBranchId+"', Distance = '"+distance+"' where DistanceId = '"+distanceId+"';";
+        String updateSql = "Update Distances set FromBranchId = '"+fromBranchId+"', ToBranchId = '"+toBranchId+"', Distance = '"+distance+"' where DistanceId = '"+distanceId+"';";
         
         int count = 0;
         try 
         {
-            PreparedStatement prepsInsertProduct = connection.prepareStatement(deleteSql, Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement prepsInsertProduct = connection.prepareStatement(updateSql, Statement.RETURN_GENERATED_KEYS);
             count = prepsInsertProduct.executeUpdate();
         }
         // Handle any errors that may have occurred.
@@ -282,5 +282,34 @@ public class DB_Access {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
         return count;
+    }
+    
+    public ResultSet GetDistancesCount()
+    {
+        String selectSql = "SELECT COUNT(Main.BranchId) AS NumberOfBranches FROM \n" +
+                                "(\n" +
+                                "	SELECT DISTINCT B.BranchId FROM Branches B\n" +
+                                "	INNER JOIN Distances D\n" +
+                                "	ON D.FromBranchId = B.BranchId\n" +
+                                "	UNION \n" +
+                                "	SELECT DISTINCT B.BranchId FROM Branches B\n" +
+                                "	INNER JOIN Distances D\n" +
+                                "	ON D.ToBranchId = B.BranchId\n" +
+                                ")\n" +
+                                "Main;";
+      
+        ResultSet resultSet = null;
+
+        try 
+        {
+            Statement statement = connection.createStatement();
+            resultSet = statement.executeQuery(selectSql);
+        }
+        // Handle any errors that may have occurred.
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        
+        return resultSet;
     }
 }
