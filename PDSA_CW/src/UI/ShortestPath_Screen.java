@@ -8,6 +8,13 @@ package UI;
 import Data_Structures.ShortestPath_DS;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -18,12 +25,15 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
     /**
      * Creates new form ShortestPath_Screen
      */
+    TableRowSorter sorting;  
     ShortestPath_DS sds;
+    
     public ShortestPath_Screen() {
         initComponents();
         sds = new ShortestPath_DS();
         sds.LoadBranchInfo(tbl_branchInfo);
         sds.LoadBranchDistances();
+         BranchInformationSearch(tbl_branchInfo);
     }
 
     /**
@@ -252,23 +262,26 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(tbl_branchInfo.getSelectedRowCount() != 0)
         {
-                    txt_BranchId.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0).toString());
-                    txt_BranchName.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 1).toString());
-                    txt_Location.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 2).toString());
+            ClearFields();
+            txt_BranchId.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 0).toString());
+            txt_BranchName.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 1).toString());
+            txt_Location.setText(tbl_branchInfo.getValueAt(tbl_branchInfo.getSelectedRow(), 2).toString());
         }
     }//GEN-LAST:event_tbl_branchInfoMouseClicked
 
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
-        txtArea_shortestPath.setText("");
-        long startTime = 00;
-        long endTime = 00;
-        
-        startTime = System.nanoTime();
-        sds.PrintShortestPath(txtArea_shortestPath, Integer.parseInt(txt_BranchId.getText()));
-        endTime = System.nanoTime();
-        
-        getExecTime(startTime,endTime);
+        if(!txt_BranchId.getText().equals(""))
+        {
+            long startTime = 00;
+            long endTime = 00;
+
+            startTime = System.nanoTime();
+            sds.PrintShortestPath(txtArea_shortestPath, Integer.parseInt(txt_BranchId.getText()));
+            endTime = System.nanoTime();
+
+            getExecTime(startTime,endTime);
+        }
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
@@ -276,6 +289,47 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         ClearFields();
     }//GEN-LAST:event_btn_clearActionPerformed
 
+     public void BranchInformationSearch(JTable branchInfo)
+    {
+        try
+        {
+             DefaultTableModel model = (DefaultTableModel) branchInfo.getModel();
+             sorting = new TableRowSorter<>(model);
+             branchInfo.setRowSorter(sorting);
+             txt_search.getDocument().addDocumentListener(new DocumentListener() {
+                 @Override
+                 public void insertUpdate(DocumentEvent e) {
+                     Search(txt_search.getText());
+                 }
+
+                 @Override
+                 public void removeUpdate(DocumentEvent e) {
+                     Search(txt_search.getText());
+                 }
+
+                 @Override
+                 public void changedUpdate(DocumentEvent e) {
+                     Search(txt_search.getText());
+                 }
+             });
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void Search(String text)
+    {
+        if(text.length()==0)
+        {
+            sorting.setRowFilter(null);
+        }
+        else
+        {
+            sorting.setRowFilter(RowFilter.regexFilter(text));
+        }
+    }
     public void ClearFields()
     {
         txt_BranchId.setText("");
