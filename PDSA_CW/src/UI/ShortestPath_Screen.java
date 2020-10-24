@@ -6,6 +6,8 @@
 package UI;
 
 import Data_Structures.ShortestPath_DS;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 /**
  *
@@ -259,13 +261,37 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
     private void btn_submitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_submitActionPerformed
         // TODO add your handling code here:
         txtArea_shortestPath.setText("");
+        long startTime = 00;
+        long endTime = 00;
+        
+        startTime = System.nanoTime();
         sds.PrintShortestPath(txtArea_shortestPath, Integer.parseInt(txt_BranchId.getText()));
+        endTime = System.nanoTime();
+        
+        getExecTime(startTime,endTime);
     }//GEN-LAST:event_btn_submitActionPerformed
 
     private void btn_clearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_clearActionPerformed
         // TODO add your handling code here:
+        ClearFields();
     }//GEN-LAST:event_btn_clearActionPerformed
 
+    public void ClearFields()
+    {
+        txt_BranchId.setText("");
+        txt_BranchName.setText("");
+        txt_Location.setText("");
+        txtArea_shortestPath.setText("");
+    }
+    
+    public void getExecTime(long startTime, long endTime)
+    {
+        DecimalFormat df = new DecimalFormat("#.#####");
+        df.setRoundingMode(RoundingMode.CEILING);
+        long elapsedTime = endTime - startTime;
+        Double inMiliSeconds = (double)elapsedTime/1000000000;
+        lbl_nanoScnds.setText(String.valueOf(elapsedTime) + " ( " + df.format(inMiliSeconds) + "s ) ");
+    }
     /**
      * @param args the command line arguments
      */

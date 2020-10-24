@@ -71,6 +71,8 @@ public class ShortestPath_DS {
     Queue<String[]> BranchInfoQueue;
     Queue<String[]> BranchDistanceQueue;
     DB_Access db;
+    int NumberOfVertex = 0;
+    Graph graph;
     
     public ShortestPath_DS()
     {
@@ -129,6 +131,8 @@ public class ShortestPath_DS {
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        CreateGraph();
     }
     
     private static void getRoute(int[] prev, int i, List<Integer> route)
@@ -188,7 +192,7 @@ public class ShortestPath_DS {
         }
     }
     
-    public void PrintShortestPath(JTextArea ta, int source)
+    public void CreateGraph()
     {
         ArrayList<Edge> edges =  new ArrayList<Edge>();
 
@@ -199,24 +203,26 @@ public class ShortestPath_DS {
         }
 
         // Set number of vertices in the graph
-        int NumberOfVertex = 0;
-        
-        ResultSet rs = db.GetDistancesCount();
+
+        ResultSet rs2 = db.GetDistancesCount();
         BranchDistanceQueue.clear();
         try{
-            while(rs.next())
+            while(rs2.next())
             {
-                NumberOfVertex = rs.getInt(1) + 1;
+                NumberOfVertex = rs2.getInt(1) + 1;
             }
         }
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
-        // construct graph
-        Graph graph = new Graph(edges, NumberOfVertex);
 
+        // construct graph
+        graph = new Graph(edges, NumberOfVertex);
+    }
+    
+    public void PrintShortestPath(JTextArea ta, int source)
+    {    
         shortestPath(graph, source, NumberOfVertex, ta);
     }      
 }
