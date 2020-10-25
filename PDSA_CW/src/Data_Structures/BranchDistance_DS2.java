@@ -194,4 +194,17 @@ public class BranchDistance_DS2 {
         }
         return res;
     }
+    
+    public Boolean ValidateDistances(String fromBranchId, String toBranchId, String distance)
+    {
+        Boolean res =false;
+        for (String[] s : BranchDistanceQueue)
+        {
+            if(s[1].equals(fromBranchId) && s[4].equals(toBranchId) && s[7].equals(distance) || s[1].equals(toBranchId) && s[4].equals(fromBranchId) && s[7].equals(distance) )
+            {
+              res = true;
+            }
+        }
+        return res;
+    }
 }
