@@ -32,6 +32,7 @@ public class Home_Screen extends javax.swing.JFrame {
         btn_branchDist = new javax.swing.JButton();
         btn_toBe = new javax.swing.JButton();
         btn_branchInfo = new javax.swing.JButton();
+        btn_shrtestPath = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,13 +50,21 @@ public class Home_Screen extends javax.swing.JFrame {
         });
 
         btn_toBe.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btn_toBe.setText("To be implement");
+        btn_toBe.setText("To be implemented");
 
         btn_branchInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn_branchInfo.setText("Branch Information");
         btn_branchInfo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_branchInfoActionPerformed(evt);
+            }
+        });
+
+        btn_shrtestPath.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btn_shrtestPath.setText("Shortest Path & Distances");
+        btn_shrtestPath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_shrtestPathActionPerformed(evt);
             }
         });
 
@@ -73,9 +82,11 @@ public class Home_Screen extends javax.swing.JFrame {
                         .addComponent(btn_branchInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(36, 36, 36)
                         .addComponent(btn_branchDist, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addGap(39, 39, 39)
+                        .addComponent(btn_shrtestPath, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(39, 39, 39)
                         .addComponent(btn_toBe, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(100, Short.MAX_VALUE))
+                .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,8 +96,9 @@ public class Home_Screen extends javax.swing.JFrame {
                 .addGap(104, 104, 104)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_branchDist, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_toBe, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_branchInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_branchInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_shrtestPath, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_toBe, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
 
@@ -118,6 +130,13 @@ public class Home_Screen extends javax.swing.JFrame {
         this.setVisible(false);
         branchDist.setVisible(true);
     }//GEN-LAST:event_btn_branchDistActionPerformed
+
+    private void btn_shrtestPathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_shrtestPathActionPerformed
+        // TODO add your handling code here:
+        ShortestPath_Screen shortestPath = new ShortestPath_Screen();
+        this.setVisible(false);
+        shortestPath.setVisible(true);
+    }//GEN-LAST:event_btn_shrtestPathActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,6 +176,7 @@ public class Home_Screen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_branchDist;
     private javax.swing.JButton btn_branchInfo;
+    private javax.swing.JButton btn_shrtestPath;
     private javax.swing.JButton btn_toBe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
