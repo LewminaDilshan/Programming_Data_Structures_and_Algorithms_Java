@@ -30,7 +30,7 @@ public class Home_Screen extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btn_branchDist = new javax.swing.JButton();
-        btn_toBe = new javax.swing.JButton();
+        btn_minimumConnectors = new javax.swing.JButton();
         btn_branchInfo = new javax.swing.JButton();
         btn_shrtestPath = new javax.swing.JButton();
 
@@ -49,8 +49,13 @@ public class Home_Screen extends javax.swing.JFrame {
             }
         });
 
-        btn_toBe.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        btn_toBe.setText("To be implemented");
+        btn_minimumConnectors.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btn_minimumConnectors.setText("Minimum Connectors");
+        btn_minimumConnectors.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_minimumConnectorsActionPerformed(evt);
+            }
+        });
 
         btn_branchInfo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btn_branchInfo.setText("Branch Information");
@@ -85,7 +90,7 @@ public class Home_Screen extends javax.swing.JFrame {
                         .addGap(39, 39, 39)
                         .addComponent(btn_shrtestPath, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(btn_toBe, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btn_minimumConnectors, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(107, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -98,7 +103,7 @@ public class Home_Screen extends javax.swing.JFrame {
                     .addComponent(btn_branchDist, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_branchInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_shrtestPath, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_toBe, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_minimumConnectors, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(191, Short.MAX_VALUE))
         );
 
@@ -138,6 +143,13 @@ public class Home_Screen extends javax.swing.JFrame {
         shortestPath.setVisible(true);
     }//GEN-LAST:event_btn_shrtestPathActionPerformed
 
+    private void btn_minimumConnectorsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_minimumConnectorsActionPerformed
+        // TODO add your handling code here:
+        MinimumConnectors_Screen minimumConnectors = new MinimumConnectors_Screen();
+        this.setVisible(false);
+        minimumConnectors.setVisible(true);
+    }//GEN-LAST:event_btn_minimumConnectorsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,8 +188,8 @@ public class Home_Screen extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_branchDist;
     private javax.swing.JButton btn_branchInfo;
+    private javax.swing.JButton btn_minimumConnectors;
     private javax.swing.JButton btn_shrtestPath;
-    private javax.swing.JButton btn_toBe;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
