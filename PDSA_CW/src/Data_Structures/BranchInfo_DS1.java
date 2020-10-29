@@ -29,7 +29,7 @@ public class BranchInfo_DS1 {
     }
     
     public void LoadBranchInformation(JTable branchInfo)
-    {
+    {  
         try
         {
             ResultSet rs = db.BranchInfoLoad();
