@@ -33,7 +33,7 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         sds = new ShortestPath_DS();
         sds.LoadBranchInfo(tbl_branchInfo);
         sds.LoadBranchDistances();
-         BranchInformationSearch(tbl_branchInfo);
+        BranchInformationSearch(tbl_branchInfo);
     }
 
     /**
@@ -64,6 +64,7 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         btn_clear = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         lbl_nanoScnds = new javax.swing.JLabel();
+        btn_home = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -156,6 +157,14 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         lbl_nanoScnds.setFont(new java.awt.Font("Tahoma", 0, 15)); // NOI18N
         lbl_nanoScnds.setForeground(new java.awt.Color(255, 0, 0));
 
+        btn_home.setBackground(new java.awt.Color(153, 153, 153));
+        btn_home.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icons8_home_50px_1.png"))); // NOI18N
+        btn_home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_homeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,7 +174,8 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addContainerGap())
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -192,8 +202,8 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
                                 .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel14)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(20, 20, 20))))
+                                .addComponent(lbl_nanoScnds, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(20, 20, 20))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
@@ -204,8 +214,10 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(btn_home, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(141, 141, 141)
@@ -286,6 +298,13 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         // TODO add your handling code here:
         ClearFields();
     }//GEN-LAST:event_btn_clearActionPerformed
+
+    private void btn_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_homeActionPerformed
+        // TODO add your handling code here:
+        Home_Screen home = new Home_Screen();
+        this.setVisible(false);
+        home.setVisible(true);
+    }//GEN-LAST:event_btn_homeActionPerformed
 
      public void BranchInformationSearch(JTable branchInfo)
     {
@@ -384,6 +403,7 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_clear;
+    private javax.swing.JButton btn_home;
     private javax.swing.JButton btn_submit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
