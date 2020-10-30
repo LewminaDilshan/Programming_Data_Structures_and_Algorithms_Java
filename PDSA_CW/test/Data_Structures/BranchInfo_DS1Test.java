@@ -16,7 +16,6 @@ import static org.junit.Assert.*;
 import org.junit.FixMethodOrder;
 import org.junit.runners.MethodSorters;
 
-
 /**
  *
  * @author smprs

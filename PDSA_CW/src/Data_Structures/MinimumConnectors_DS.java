@@ -16,45 +16,50 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author lewmi
+ * @author smprs
  */
 public class MinimumConnectors_DS {
     
-    Queue<String[]> BranchInfoQueue;
+    Queue<String[]> BranchDistanceQueue;
     DB_Access db;
     int MaxBranchId = 0;
     Graph graph;
     
     public MinimumConnectors_DS()
     {
-        BranchInfoQueue = new LinkedList<String[]>();
+        BranchDistanceQueue = new LinkedList<String[]>();
         db = new DB_Access();
     }
     
-    public void LoadBranchInfo(JTable jt)
-    {
-        ResultSet rs = db.BranchInformationLoad();
-        BranchInfoQueue.clear();
+    public void LoadBranchDistances(JTable jt)
+    {        
+        ResultSet rs = db.BranchDistanceLoad();
+        BranchDistanceQueue.clear();
         try{
             while(rs.next())
             {
-                String[] aryRecd = new String[3];
+                String[] aryRecd = new String[8];
                 aryRecd[0] = String.valueOf(rs.getInt(1));
                 aryRecd[1] = rs.getString(2);
                 aryRecd[2] = rs.getString(3);
-                BranchInfoQueue.add(aryRecd);
+                aryRecd[3] = rs.getString(4);
+                aryRecd[4] = rs.getString(5);
+                aryRecd[5] = rs.getString(6);
+                aryRecd[6] = rs.getString(7);
+                aryRecd[7] = rs.getString(8);
+                BranchDistanceQueue.add(aryRecd);
             }
         }
         catch(SQLException e)
         {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
+        
         DefaultTableModel model = (DefaultTableModel) jt.getModel();
         model.setRowCount(0);
-        for(String[] s : BranchInfoQueue) { 
+        for(String[] s : BranchDistanceQueue) { 
             Object[] row = s;
             model.addRow(row);
-        }
+        }  
     }
 }

@@ -200,7 +200,7 @@ public class ShortestPath_DS {
                         toBranchName = s[1];
                     }
                 }
-                txtArea.setText(txtArea.getText()+ "From Branch : - " + fromBranchName + "\nTo Branch : - " + toBranchName + "    \nDistance : - " + dist.get(i) + "    \nRoute : - " + route +"\n\n");
+                txtArea.setText(txtArea.getText()+ "From Branch : - " + fromBranchName + "\nTo Branch : - " + toBranchName + "    \nDistance : - " + dist.get(i)  + "    \nRoute : - " + route + "\n\n");
                 route.clear();
             }
         }

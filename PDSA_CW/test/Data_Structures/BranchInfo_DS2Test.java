@@ -95,7 +95,7 @@ public class BranchInfo_DS2Test {
     @Test
     public void test4Remove() {
         System.out.println("Remove");
-        String id = "7";
+        String id = "6";
         
         JTable jt = new JTable();
         String[] header = {"Branch ID","Branch Name","Location"};
