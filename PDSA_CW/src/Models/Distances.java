@@ -16,6 +16,15 @@ public class Distances {
     int ToBranchId;
     String Distance;
 
+    public Distances() {
+    }
+
+    public Distances(int FromBranchId, int ToBranchId, String Distance) {
+        this.FromBranchId = FromBranchId;
+        this.ToBranchId = ToBranchId;
+        this.Distance = Distance;
+    }
+
     public int getDistanceId() {
         return DistanceId;
     }
