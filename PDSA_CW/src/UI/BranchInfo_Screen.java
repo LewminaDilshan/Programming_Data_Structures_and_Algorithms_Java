@@ -396,7 +396,7 @@ public class BranchInfo_Screen extends javax.swing.JFrame {
             }
             else if(cmb_Program.getSelectedIndex() == 3 || cmb_Program.getSelectedIndex() == 4)
             {
-                if(isLoadByDSone.equals(true))
+                if(isLoadByDSone.equals(false))
                 {
                     if(tbl_branchInfo.getRowCount() > 0 && tbl_branchInfo.getSelectedRowCount() > 0)
                     {
