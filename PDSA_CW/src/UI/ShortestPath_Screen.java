@@ -285,7 +285,8 @@ public class ShortestPath_Screen extends javax.swing.JFrame {
         {
             long startTime = 00;
             long endTime = 00;
-
+            
+            txtArea_shortestPath.setText("");
             startTime = System.nanoTime();
             sds.PrintShortestPath(txtArea_shortestPath, Integer.parseInt(txt_BranchId.getText()));
             endTime = System.nanoTime();

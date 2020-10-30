@@ -215,8 +215,21 @@ public class MinimumConnectors_DS
         graph.primMST(txtArea);
     }
     
-    public void FindMinimumSpaningTree(JTextArea txtArea, Queue<String[]> selectedBranchDistances)
+    public void FindMinimumSpaningTree(JTextArea txtArea, JTable jt)
     {
+        Queue<String[]> selectedBranchDistances = new LinkedList<String[]>();;
+        
+        int[] indexes = jt.getSelectedRows();
+        DefaultTableModel model = (DefaultTableModel) jt.getModel();
+        for (int i = 0; i < indexes.length; i++) {           
+            for(String[] s : BranchDistanceQueue) { 
+                if(s[0].equals(model.getValueAt(indexes[i], 0)))
+                {
+                    selectedBranchDistances.add(s);
+                }
+            }
+        }
+        
         Graph graph = new Graph(branchList);
         userSelectedDistanceList.clear();
         selectedBranchDistances.forEach((s) -> {
