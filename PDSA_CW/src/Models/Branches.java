@@ -15,6 +15,15 @@ public class Branches {
     String BranchName;
     String Location;
 
+    public Branches() {
+    }
+
+    public Branches(int BranchId, String BranchName, String Location) {
+        this.BranchId = BranchId;
+        this.BranchName = BranchName;
+        this.Location = Location;
+    }
+
     public int getBranchId() {
         return BranchId;
     }
