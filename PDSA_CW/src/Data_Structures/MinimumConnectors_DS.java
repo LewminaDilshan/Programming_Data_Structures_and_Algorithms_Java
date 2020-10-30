@@ -25,17 +25,17 @@ public class MinimumConnectors_DS
 {
     static Queue<String[]> BranchDistanceQueue;
     static DB_Access db;
-    static LinkedList<Branches> branchList;
-    static LinkedList<Distances> distanceList;
-    static LinkedList<Distances> userSelectedDistanceList;
+    static LinkedList<Branches> branchList = new LinkedList<>();
+    static LinkedList<Distances>  distanceList = new LinkedList<>();
+    static LinkedList<Distances> userSelectedDistanceList = new LinkedList<>();
     
     
     public MinimumConnectors_DS()
     {
-        branchList = new LinkedList<>();
-        distanceList = new LinkedList<>();
+//        branchList = new LinkedList<>();
+//        distanceList = new LinkedList<>();
         BranchDistanceQueue = new LinkedList<String[]>();
-        userSelectedDistanceList = new LinkedList<>();
+        //userSelectedDistanceList = new LinkedList<>();
         db = new DB_Access();
     }
     
