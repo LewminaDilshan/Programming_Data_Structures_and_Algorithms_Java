@@ -2,10 +2,10 @@
 
 **Including..**
 
-   *Queue
+   * Queue
    
-   *Linklist
+   * Linklist
    
-   *Finding Shortest Path (Using dijkstra's algorithm)
+   * Finding Shortest Path (Using dijkstra's algorithm)
    
-   *Finding Minimm Connectors (Using prim's algorithm)
+   * Finding Minimm Connectors (Using prim's algorithm)
