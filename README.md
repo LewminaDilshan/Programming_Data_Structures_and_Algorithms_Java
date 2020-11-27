@@ -1,4 +1,4 @@
-# Programming Data Structures and Algorithm
+# Programming Data Structures and Algorithms
 
 **Including..**
 
