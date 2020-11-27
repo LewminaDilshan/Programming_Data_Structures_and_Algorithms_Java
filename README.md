@@ -8,4 +8,4 @@
    
    * Finding Shortest Path (Using dijkstra's algorithm)
    
-   * Finding Minimm Connectors (Using prim's algorithm)
+   * Finding Minimum Connectors (Using prim's algorithm)
