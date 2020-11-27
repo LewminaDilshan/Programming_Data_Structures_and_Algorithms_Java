@@ -4,8 +4,8 @@
 
    * Queue
    
-   * Linklist
+   * Linked-list
    
    * Finding Shortest Path (Using dijkstra's algorithm)
    
-   * Finding Minimum Connectors (Using prim's algorithm)
+   * Minimum Spanning Tree (Using prim's algorithm)
