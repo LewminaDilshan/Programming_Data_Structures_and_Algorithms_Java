@@ -14,8 +14,8 @@
 
 * Then, Change the following lines in 'DB_Acess.java' file using 'your MSSQL server name', 'username' and 'password'.
 
-     String url = "jdbc:sqlserver://YOUR SERVER NAME\\SQLFULL:1433;databaseName=PDSACourseWork;";
-     String user = "Username";
-     String pass = "Password";
+     * String url = "jdbc:sqlserver://YOUR SERVER NAME\\SQLFULL:1433;databaseName=PDSACourseWork;";
+     * String user = "Username";
+     * String pass = "Password";
      
      
