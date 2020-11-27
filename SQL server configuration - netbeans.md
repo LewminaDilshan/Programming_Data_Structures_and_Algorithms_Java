@@ -1,6 +1,6 @@
 *First, To allow TCP/IP port follow instructions in following links.
 
-     Video - [click Here](https://www.youtube.com/watch?v=UwEi88Rch7U)
+     Video - https://www.youtube.com/watch?v=UwEi88Rch7U
      Link (stackoverflow) - https://stackoverflow.com/questions/18841744/jdbc-connection-failed-error-tcp-ip-connection-to-host-failed
           
 
